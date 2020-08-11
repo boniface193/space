@@ -1,5 +1,2 @@
-function login_auth() {
-    alert(1)
-}
-
+const Base_URL = 'https://pavspace-api.herokuapp.com/api';
 

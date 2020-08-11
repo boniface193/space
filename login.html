@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,7 +8,7 @@
     <title>First Pavilion Space Hub | Login</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="public/assets/media/image/favicon.png"/>
+    <link rel="shortcut icon" href="public/assets/media/image/favicon.png" />
 
     <!-- Plugin styles -->
     <link rel="stylesheet" href="public/vendors/bundle.css" type="text/css">
@@ -15,98 +16,115 @@
     <!-- App styles -->
     <link rel="stylesheet" href="public/assets/css/app.min.css" type="text/css">
 </head>
+
 <body class="form-membership">
 
-<!-- begin::preloader-->
-<div class="preloader">
-    <div class="preloader-icon"></div>
-</div>
-<!-- end::preloader -->
-
-<div class="form-wrapper">
-
-    <!-- logo -->
-    <div id="logo">
-        <img src="public/assets/media/image/dark-logo.png" alt="image">
+    <!-- begin::preloader-->
+    <div class="preloader">
+        <div class="preloader-icon"></div>
     </div>
-    <!-- ./ logo -->
+    <!-- end::preloader -->
+    <div id="app">
 
-    
-    <h5>Sign in</h5>
+        <div class="form-wrapper">
 
-    <!-- form -->
-    <form id="frmSubmit">
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="Username or email" required autofocus>
-        </div>
-        <div class="form-group">
-            <input type="password" class="form-control" placeholder="Password" required>
-        </div>
-        <div class="form-group d-flex justify-content-between">
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" checked="" id="customCheck1">
-                <label class="custom-control-label" for="customCheck1">Remember me</label>
+            <!-- logo -->
+            <div id="logo">
+                <img src="public/assets/media/image/dark-logo.png" alt="image">
             </div>
-            <a href="recovery-password.html">Reset password</a>
+            <!-- ./ logo -->
+
+            <h5>
+                Login
+            </h5>
+
+            <!-- form -->
+            <form id="frmSubmit" @submit.prevent="loginUsers" method="POST">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Username" required autofocus
+                        v-model="username">
+                    <div v-if="username > ''">
+                        <span class="text-success">Looks good!</span>
+                    </div>
+                    <div v-else>
+                        <span class="text-danger">Enter your Username!</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Password" required v-model="password">
+                    <div v-if="password > ''">
+                        <span class="text-success">Looks good!</span>
+                    </div>
+                    <div v-else>
+                        <span class="text-danger">Enter your Password!</span>
+                    </div>
+                </div>
+                <button class="btn btn-primary btn-block">
+                    <div v-if="loading" class="spinner-grow spinner-grow-sm" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div v-else>
+                        <span>Login</span>
+                    </div>
+                </button>
+                <hr>
+                <p class="text-muted">Login with your social media account.</p>
+                <ul class="list-inline">
+                    <li class="list-inline-item">
+                        <a href="login.html#" class="btn btn-floating btn-facebook">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="login.html#" class="btn btn-floating btn-twitter">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="login.html#" class="btn btn-floating btn-dribbble">
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="login.html#" class="btn btn-floating btn-linkedin">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="login.html#" class="btn btn-floating btn-google">
+                            <i class="fa fa-google"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="login.html#" class="btn btn-floating btn-behance">
+                            <i class="fa fa-behance"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="login.html#" class="btn btn-floating btn-instagram">
+                            <i class="fa fa-instagram"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- ./ form -->
+
         </div>
-        <button class="btn btn-primary btn-block">Sign in</button>
-        <hr>
-        <p class="text-muted">Login with your social media account.</p>
-        <ul class="list-inline">
-            <li class="list-inline-item">
-                <a href="login.html#" class="btn btn-floating btn-facebook">
-                    <i class="fa fa-facebook"></i>
-                </a>
-            </li>
-            <li class="list-inline-item">
-                <a href="login.html#" class="btn btn-floating btn-twitter">
-                    <i class="fa fa-twitter"></i>
-                </a>
-            </li>
-            <li class="list-inline-item">
-                <a href="login.html#" class="btn btn-floating btn-dribbble">
-                    <i class="fa fa-dribbble"></i>
-                </a>
-            </li>
-            <li class="list-inline-item">
-                <a href="login.html#" class="btn btn-floating btn-linkedin">
-                    <i class="fa fa-linkedin"></i>
-                </a>
-            </li>
-            <li class="list-inline-item">
-                <a href="login.html#" class="btn btn-floating btn-google">
-                    <i class="fa fa-google"></i>
-                </a>
-            </li>
-            <li class="list-inline-item">
-                <a href="login.html#" class="btn btn-floating btn-behance">
-                    <i class="fa fa-behance"></i>
-                </a>
-            </li>
-            <li class="list-inline-item">
-                <a href="login.html#" class="btn btn-floating btn-instagram">
-                    <i class="fa fa-instagram"></i>
-                </a>
-            </li>
-        </ul>
-        <hr>
-        <p class="text-muted">Don't have an account?</p>
-        <a href="register.html" class="btn btn-outline-light btn-sm">Register now!</a>
-    </form>
-    <!-- ./ form -->
+    </div>
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <script src="controllers/login.js"></script>
+    <script src="models/login_auth.js"></script>
 
+    <!-- Plugin scripts -->
+    <script src="public/vendors/bundle.js"></script>
 
-</div>
-
-<!-- Plugin scripts -->
-<script src="public/vendors/bundle.js"></script>
-
-<!-- App scripts -->
-<script src="public/assets/js/app.min.js"></script>
-<!-- controller files -->
-<script src="controllers/controller.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"
-    integrity="sha512-VZ6m0F78+yo3sbu48gElK4irv2dzPoep8oo9LEjxviigcnnnNvnTOJRSrIhuFk68FMLOpiNz+T77nNY89rnWDg=="
-    crossorigin="anonymous"></script>
+    <!-- App scripts -->
+    <script src="public/assets/js/app.min.js"></script>
+    <!-- controller files -->
+    <script src="controllers/controller.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"
+        integrity="sha512-VZ6m0F78+yo3sbu48gElK4irv2dzPoep8oo9LEjxviigcnnnNvnTOJRSrIhuFk68FMLOpiNz+T77nNY89rnWDg=="
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

@@ -944,7 +944,7 @@
                                                         (not
                                                         paid)</span>
                                                 </td>
-                                                <td>2020/02/28</td>
+                                                <td onloadstart="">2020/02/28</td>
                                                 <td class="text-right">
                                                     <div class="dropdown">
                                                         <a href="#" data-toggle="dropdown" class="btn btn-floating"
@@ -982,12 +982,9 @@
                                         <h4 class="mb-3 text-center">{{message}}</h4>
                                         <div class="row my-3">
                                             <div class="col-md-10 ml-auto mr-auto">
-                                                <p class="text-muted">Get additional 500 GB space for your documents and
-                                                    files. Expand your storage and enjoy your business. Change plan for
-                                                    more
-                                                    space.</p>
-                                                <button class="btn btn-primary" data-dismiss="modal">Plan
-                                                    Upgrade</button>
+                                                <p class="text-muted"><strong>Notice!</strong> You have not subscribe to any of our package yet.
+                                                </p>
+                                                <button class="btn btn-primary" data-dismiss="modal">Subscribe</button>
                                             </div>
                                         </div>
                                         <a href="#"
@@ -1003,16 +1000,7 @@
                     <!-- ./ Content -->
 
                     <!-- Footer -->
-                    <footer class="content-footer">
-                        <div>© 2020 Gogi - <a href="http://laborasyon.com" target="_blank">Laborasyon</a></div>
-                        <div>
-                            <nav class="nav">
-                                <a href="https://themeforest.net/licenses/standard" class="nav-link">Licenses</a>
-                                <a href="#" class="nav-link">Change Log</a>
-                                <a href="#" class="nav-link">Get Help</a>
-                            </nav>
-                        </div>
-                    </footer>
+                    <component-footer></component-footer>
                     <!-- ./ Footer -->
                 </div>
                 <!-- ./ Content body -->
@@ -1023,24 +1011,26 @@
     </div>
     <!-- vue app ends here -->
     <!-- development version, includes helpful console warnings -->
+
+    <!-- Plugin scripts -->
+    <script src="public/vendors/bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"
+        integrity="sha512-VZ6m0F78+yo3sbu48gElK4irv2dzPoep8oo9LEjxviigcnnnNvnTOJRSrIhuFk68FMLOpiNz+T77nNY89rnWDg=="
+        crossorigin="anonymous"></script>
+    <script src="models/login_auth.js"></script>
+
+    <!-- App scripts -->
+    <!-- <script src="public/assets/js/app.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
     <script src="components/settingsNotification.js"></script>
     <script src="components/topHeader.js"></script>
     <script src="components/navigation.js"></script>
-    <script>
+    <script src="controllers/controller.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="controllers/home.js"></script>
 
-        var app = new Vue({
-            el: '#app',
-            data: {
-                message: 'Hello Vue!'
-            }
-        })
-    </script>
-    <script src="components/settingsNotification.js"></script>
-    <script src="components/topHeader.js"></script>
 
     <!-- Main scripts -->
-    <script src="public/vendors/bundle.js"></script>
 
     <!-- Apex chart -->
     <script src="public/vendors/charts/apex/apexcharts.min.js"></script>
