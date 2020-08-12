@@ -11,7 +11,7 @@ Vue.component('top-header', {
 
                         <div class="header-logo">
                             <a href=index.html>
-                                <img class="logo" src="public/assets/media/image/logo.png" alt="logo">
+                                <img class="logo" src="public/assets/media/image/pavspaceImg/white-logo.png" alt="logo" width="150px">
                             </a>
                         </div>
                     </div>
@@ -19,7 +19,7 @@ Vue.component('top-header', {
                     <div class="header-body">
                         <div class="header-body-left">
                             <ul class="navbar-nav">
-                                <li class="nav-item mr-3">
+                                <li class="nav-item mr-3 search">
                                     <div class="header-search-form">
                                         <form>
                                             <div class="input-group">
@@ -143,7 +143,7 @@ Vue.component('top-header', {
                                 </li>
 
                                 <li class="nav-item dropdown">
-                                    <a href="#" class="nav-link nav-link-notify" title="Notifications"
+                                    <a href="#" class="nav-link nav-link-notify notification" title="Notifications"
                                         data-toggle="dropdown">
                                         <i data-feather="bell"></i>
                                     </a>
@@ -383,7 +383,7 @@ Vue.component('top-header', {
                                     </a>
                                 </li>
 
-                                <li class="nav-item dropdown">
+                                <li class="nav-item dropdown settings">
                                     <a href="#" class="nav-link dropdown-toggle" title="User menu"
                                         data-toggle="dropdown">
                                         <figure class="avatar avatar-sm">
@@ -393,7 +393,7 @@ Vue.component('top-header', {
                                         <span class="ml-2 d-sm-inline d-none">Bony Gidden</span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-big">
-                                        <div class="text-center py-4">
+                                        <div class="text-center py-4 manageAcct">
                                             <figure class="avatar avatar-lg mb-3 border-0">
                                                 <img src="public/assets/media/image/user/man_avatar3.jpg"
                                                     class="rounded-circle" alt="image">

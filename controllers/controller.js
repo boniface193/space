@@ -1,17 +1,5 @@
-// const frmSubmit = document.getElementById('frmSubmit');
-
-// frmSubmit.addEventListener('submit', login);
-
-// function login() {
-//     if (status == 200) {
-        
-//     toast(toastr.success('Welcome home!'));
-//     } else{
-//         toast(toastr.error('too bad!'));
-//     }
-// }
-
-function toast() {
+// function to call alert
+const toast = () => {
     $('.preloader').fadeOut(300, function () {
         toastr.options = {
             timeOut: 2000,
@@ -23,3 +11,13 @@ function toast() {
         };
     });
 };
+
+// // function for dashboard movie
+// const movie = () => {
+
+// }
+
+// // function for dashboard payment history
+// const payHistory = () => {
+
+// }

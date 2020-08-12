@@ -1,7 +1,6 @@
-var app = new Vue({
+const app = new Vue({
     el: '#app',
     data: {
-        message: 'Hello Vue!',
         username: '',
         password: '',
         // errors: '',
@@ -9,7 +8,7 @@ var app = new Vue({
     },
 
     methods: {
-        loginUsers: function () {
+        loginUsers() {
             // this.errors = []
             this.loading = true;
 
@@ -19,11 +18,10 @@ var app = new Vue({
             })
                 .then(response => {
                     data = response.data;
-                    console.log(data) //remove console
-                    localStorage.setItem('accessToken', data.access);
-                    localStorage.setItem('refreshToken', data.refresh);
+                    sessionStorage.setItem('accessToken', data.access);
+                    sessionStorage.setItem('refreshToken', data.refresh);
                     if (data.is_superuser) {
-                        localStorage.setItem('is_superuser', JSON.stringify(data.is_superuser));
+                        sessionStorage.setItem('is_superuser', JSON.stringify(data.is_superuser));
                         window.location.href = 'admin.html';
                     } else{
                         window.location.href = 'index.html';
@@ -31,24 +29,12 @@ var app = new Vue({
                      
                 })
                 .catch((error) => {
-                    console.log(error)
                     errorData = error.response;
-                    toast(toastr.error(errorData.data.detail));
-                    // this.errors.push(errorData.data.detail);
+                    toast(toastr.error(error));
                     this.loading = false;
+                    toast(toastr.error(errorData.data.detail));
                 })
         },
 
     }
 })
-
-
-// if (response.error) {
-//     this.errors.push('please provide password and username')
-// }
-
-// if (this.data === false) {
-                //     this.errors.push('please provide password and username')
-                // } else {
-
-                // }

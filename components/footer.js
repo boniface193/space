@@ -1,8 +1,8 @@
 Vue.component('component-footer', {
     computed: {
-        year: function () {
-            var d = new Date();
-            var year = d.getFullYear();
+        year() {
+            let d = new Date();
+            let year = d.getFullYear();
             return year;
         }
     },
