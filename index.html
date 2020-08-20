@@ -8,7 +8,7 @@
     <title>First Pavilion Space Hub | Welcome</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="public/assets/media/image/favicon.png" />
+    <link rel="shortcut icon" href="public/assets/media/image/pavspaceImg/logo-only.png" />
 
     <!-- Main css -->
     <link rel="stylesheet" href="public/vendors/bundle.css" type="text/css">
@@ -24,6 +24,9 @@
 
     <!-- App css -->
     <link rel="stylesheet" href="public/assets/css/app.min.css" type="text/css">
+
+    <!-- Css -->
+    <link rel="stylesheet" href="public/vendors/enjoyhint/enjoyhint.css" type="text/css">
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -60,21 +63,21 @@
                 <!-- Content body -->
                 <div class="content-body" id="container">
                     <!-- Content -->
-                    <div class="content ">
+                    <div class="content">
                         <div class="page-header d-md-flex justify-content-between">
                             <div>
-                                <h3>Welcome back, Bony</h3>
-                                <p class="text-muted">This page shows an overview for your account summary.</p>
+                                <h3>Welcome, {{message}}</h3>
+                                <p class="text-muted">This page shows an overview for your account details.</p>
                             </div>
                             <div class="mt-3 mt-md-0">
                                 <div id="dashboard-daterangepicker" class="btn btn-outline-light">
-                                    <span></span>
+                                    <span>Date Joined - {{date}}</span>
                                 </div>
                                 <a href="#" class="btn btn-primary ml-0 ml-md-2 mt-2 mt-md-0 dropdown-toggle"
-                                    data-toggle="dropdown">Actions</a>
+                                    data-toggle="dropdown">Agreement</a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="#" class="dropdown-item">Download</a>
-                                    <a href="#" class="dropdown-item">Print</a>
+                                    <a class="dropdown-item" @click.prevent="downloadFile">Download</a>
+                                    <a target="_blank" :href="fileDownload" class="dropdown-item">Print</a>
                                 </div>
                             </div>
                         </div>
@@ -118,28 +121,25 @@
                                     <div class="col-md-6">
                                         <div class="card">
                                             <div class="card-body">
-                                                <h6 class="card-title">Positive Reviews</h6>
+                                                <h6 class="card-title">Your Last Login</h6>
                                                 <div class="d-flex align-items-center mb-3">
                                                     <div>
                                                         <div class="avatar">
                                                             <span
                                                                 class="avatar-title bg-primary-bright text-primary rounded-pill">
-                                                                <i class="ti-cloud"></i>
+                                                                <i class="ti-key"></i>
                                                             </span>
                                                         </div>
                                                     </div>
-                                                    <div class="font-weight-bold ml-1 font-size-30 ml-3">0.16%</div>
+                                                    <div class="ml-1 ml-3">{{lastlogin}}</div>
                                                 </div>
-                                                <p class="mb-0"><a href="#" class="link-1">See comments</a> and respond
-                                                    to
-                                                    customers' comments.</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="card">
                                             <div class="card-body">
-                                                <h6 class="card-title">Bounce Rate</h6>
+                                                <h6 class="card-title">Address</h6>
                                                 <div class="d-flex align-items-center mb-3">
                                                     <div>
                                                         <div class="avatar">
@@ -149,58 +149,83 @@
                                                             </span>
                                                         </div>
                                                     </div>
-                                                    <div class="font-weight-bold ml-1 font-size-30 ml-3">12.87%</div>
+                                                    <div class="ml-1  ml-3">No Information Provided Yet{{address}}
+                                                    </div>
                                                 </div>
-                                                <p class="mb-0"><a class="link-1" href="#">See visits</a> that had a
-                                                    higher
-                                                    than expected
-                                                    bounce rate.</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="card">
                                             <div class="card-body">
-                                                <h6 class="card-title">Active Referrals</h6>
+                                                <h6 class="card-title">Nature Of Work</h6>
                                                 <div class="d-flex align-items-center mb-3">
                                                     <div>
                                                         <div class="avatar">
                                                             <span
                                                                 class="avatar-title bg-secondary-bright text-secondary rounded-pill">
-                                                                <i class="ti-email"></i>
+                                                                <i class="ti-briefcase"></i>
                                                             </span>
                                                         </div>
                                                     </div>
-                                                    <div class="font-weight-bold ml-1 font-size-30 ml-3">12.87%</div>
+                                                    <div class="ml-1 ml-3">{{natureWork}}</div>
                                                 </div>
-                                                <p class="mb-0"><a class="link-1" href="#">See referring</a> domains
-                                                    that
-                                                    sent most visits
-                                                    last month.</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="card">
                                             <div class="card-body">
-                                                <h6 class="card-title">Opened Invites</h6>
+                                                <h6 class="card-title">Name Of Your  Team</h6>
                                                 <div class="d-flex align-items-center mb-3">
                                                     <div>
                                                         <div class="avatar">
                                                             <span
                                                                 class="avatar-title bg-warning-bright text-warning rounded-pill">
-                                                                <i class="ti-dashboard"></i>
+                                                                <i class="ti-user"></i>
                                                             </span>
                                                         </div>
                                                     </div>
-                                                    <div class="font-weight-bold ml-1 font-size-30 ml-3">12.87%</div>
+                                                    <div class="ml-3">{{team}}</div>
                                                 </div>
-                                                <p class="mb-0"><a class="link-1" href="#">See clients</a> that accepted
-                                                    your invitation to
-                                                    connect.</p>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Plan Expiry</h6>
+                                                <div class="d-flex align-items-center mb-3">
+                                                    <div>
+                                                        <div class="avatar">
+                                                            <span class="avatar-title bg-success-bright text-success rounded-pill">
+                                                                <i class="ti-minus"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ml-3">{{planExpire}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Plan Details</h6>
+                                                <div class="d-flex align-items-center mb-3">
+                                                    <div>
+                                                        <div class="avatar">
+                                                            <span class="avatar-title bg-danger-bright text-danger rounded-pill">
+                                                                <i class="ti-plus"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ml-3">{{plan}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -210,85 +235,55 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between">
-                                            <h6 class="card-title mb-2">Report</h6>
-                                            <div class="dropdown">
-                                                <a href="#" class="btn btn-floating" data-toggle="dropdown">
-                                                    <i class="ti-more-alt"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="#">Action</a>
-                                                    <a class="dropdown-item" href="#">Another action</a>
-                                                    <a class="dropdown-item" href="#">Something else here</a>
-                                                </div>
-                                            </div>
+                                            <h6 class="card-title mb-2">Profile Information</h6>
                                         </div>
                                         <div>
                                             <div class="list-group list-group-flush">
                                                 <div
                                                     class="list-group-item d-flex justify-content-between align-items-center px-0">
                                                     <div>
-                                                        <h5>Stats</h5>
-                                                        <div>Last month targets</div>
-                                                    </div>
-                                                    <h3 class="text-success mb-0">$1,23M</h3>
-                                                </div>
-                                                <div
-                                                    class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                                    <div>
-                                                        <h5>Payments</h5>
-                                                        <div>Week's expenses</div>
-                                                    </div>
-                                                    <div>
-                                                        <h3 class="text-danger mb-0">- $58,90</h3>
+                                                        <h5>Email</h5>
+                                                        <div class="text-success">{{email}}</div>
                                                     </div>
                                                 </div>
                                                 <div
                                                     class="list-group-item d-flex justify-content-between align-items-center px-0">
                                                     <div>
-                                                        <h5>Orders</h5>
-                                                        <div>Total products ordered</div>
+                                                        <h5>Username</h5>
+                                                        <div class="text-primary">{{message}}</div>
                                                     </div>
+                                                </div>
+                                                <div
+                                                    class="list-group-item d-flex justify-content-between align-items-center px-0">
                                                     <div>
-                                                        <h3 class="text-info mb-0">65</h3>
+                                                        <h5>Wifi Password</h5>
+                                                        <div class="text-info">{{wifi}}</div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="mt-3">
-                                            <a href="#" class="btn btn-info">Report Detail</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between">
-                                            <h6 class="card-title mb-2">Statistics</h6>
-                                            <div class="dropdown">
-                                                <a href="#" class="btn btn-floating" data-toggle="dropdown">
-                                                    <i class="ti-more-alt"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="#">Action</a>
-                                                    <a class="dropdown-item" href="#">Another action</a>
-                                                    <a class="dropdown-item" href="#">Something else here</a>
-                                                </div>
-                                            </div>
+                                            <h6 class="card-title mb-2">Basic Information</h6>
                                         </div>
                                         <div>
                                             <div class="list-group list-group-flush">
                                                 <div
                                                     class="list-group-item d-flex justify-content-between align-items-center px-0">
                                                     <div>
-                                                        <h5>Reports</h5>
-                                                        <div>Monthly sales reports</div>
+                                                        <h5>First Name</h5>
+                                                        <div>{{firstname}}</div>
                                                     </div>
                                                     <h3 class="text-primary mb-0">421</h3>
                                                 </div>
                                                 <div
                                                     class="list-group-item d-flex justify-content-between align-items-center px-0">
                                                     <div>
-                                                        <h5>User</h5>
-                                                        <div>Visitors last week</div>
+                                                        <h5>Last Name</h5>
+                                                        <div>{{lastname}}</div>
                                                     </div>
                                                     <div>
                                                         <h3 class="text-success mb-0">+10</h3>
@@ -297,17 +292,25 @@
                                                 <div
                                                     class="list-group-item d-flex justify-content-between align-items-center px-0">
                                                     <div>
-                                                        <h5>Sales</h5>
-                                                        <div>Total average weekly report</div>
+                                                        <h5>Surname</h5>
+                                                        <div>{{surname}}</div>
                                                     </div>
                                                     <div>
                                                         <h3 class="text-primary mb-0">140</h3>
                                                     </div>
                                                 </div>
+                                                <div
+                                                    class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                                    <div>
+                                                        <h5>Gender</h5>
+                                                        <div>{{gender}}</div>
+                                                    </div>
+                                                    <div>
+                                                        <h6 class="mb-0">Phone Number</h6>
+                                                        <h5 class="text-primary mb-0">{{number}}</h5>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="mt-3">
-                                            <a href="#" class="btn btn-warning">Statistics Detail</a>
                                         </div>
                                     </div>
                                 </div>
@@ -566,8 +569,8 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="text-center">
-                                            <h6 class="card-title mb-4 text-center">Total sales this month</h6>
-                                            <h2 class="font-size-35 font-weight-bold text-center">$1.158,000</h2>
+                                            <h6 class="card-title mb-4 text-center">Total sales in the past week</h6>
+                                            <h2 class="font-size-35 font-weight-bold text-center">$950,000</h2>
                                             <p>This chart shows total sales. You can use the button below for details of
                                                 this
                                                 month's sales.</p>
@@ -577,6 +580,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="card bg-info-bright">
                                     <div class="card-body">
                                         <div class="text-center">
@@ -597,12 +601,14 @@
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between mb-4">
                                             <div>
-                                                <h6 class="card-title mb-1">Monthly Sales</h6>
-                                                <p class="small text-muted">Avarage total sales +25,5%</p>
+                                                <h6 class="card-title mb-1">Our Tweets</h6>
+                                                <p class="small text-muted">Follow us on Twitter <a
+                                                        href="https://twitter.com/@firstpavilionng"
+                                                        target="_blank">@firstpavilionng</a></p>
                                             </div>
                                             <div>
                                                 <a href="#" class="btn btn-floating">
-                                                    <i class="fa fa-refresh"></i>
+                                                    <i class="ti-reload"></i>
                                                 </a>
                                                 <div class="dropdown">
                                                     <a href="#" data-toggle="dropdown" class="btn btn-floating"
@@ -610,24 +616,23 @@
                                                         <i class="ti-more-alt"></i>
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#">Action</a>
-                                                        <a class="dropdown-item" href="#">Another action</a>
-                                                        <a class="dropdown-item" href="#">Something else here</a>
+                                                        <a class="dropdown-item"
+                                                            href="https://facebook.com/firstpavilionng"
+                                                            target="_blank">facebook</a>
+                                                        <a class="dropdown-item"
+                                                            href="https://linkedin.com/company/first-pavilion/"
+                                                            target="_blank">LinkedIn</a>
+                                                        <a class="dropdown-item"
+                                                            href="https://instagram.com/firstpavilionng"
+                                                            target="_blank">Instagram</a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="monthly-sales"></div>
-                                        <ul class="list-inline text-center">
-                                            <li class="list-inline-item">
-                                                <i class="fa fa-circle mr-1 text-success"></i> Bank Card <br>
-                                                <small class="text-muted">25,45% over</small>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <i class="fa fa-circle mr-1 text-primary"></i> Credit Card <br>
-                                                <small class="text-muted">75,55% over</small>
-                                            </li>
-                                        </ul>
+                                        <!-- <div id="monthly-sales"></div> -->
+                                        <p><a class="twitter-timeline" data-height="365px" data-lang="en"
+                                                href="https://twitter.com/firstpavilionng?ref_src=twsrc%5Etfw">Tweets
+                                                by First Pavilion Technologies</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -944,7 +949,7 @@
                                                         (not
                                                         paid)</span>
                                                 </td>
-                                                <td>2020/02/28</td>
+                                                <td onloadstart="">2020/02/28</td>
                                                 <td class="text-right">
                                                     <div class="dropdown">
                                                         <a href="#" data-toggle="dropdown" class="btn btn-floating"
@@ -967,7 +972,8 @@
                         </div>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
+                        <!-- <div v-if="showModal" class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                            aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-body text-center">
@@ -982,12 +988,10 @@
                                         <h4 class="mb-3 text-center">{{message}}</h4>
                                         <div class="row my-3">
                                             <div class="col-md-10 ml-auto mr-auto">
-                                                <p class="text-muted">Get additional 500 GB space for your documents and
-                                                    files. Expand your storage and enjoy your business. Change plan for
-                                                    more
-                                                    space.</p>
-                                                <button class="btn btn-primary" data-dismiss="modal">Plan
-                                                    Upgrade</button>
+                                                <p class="text-muted"><strong>Notice!</strong> You have not subscribe to
+                                                    any of our package yet.
+                                                </p>
+                                                <button class="btn btn-primary" data-dismiss="modal">Subscribe</button>
                                             </div>
                                         </div>
                                         <a href="#"
@@ -998,21 +1002,12 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- ./ Content -->
 
                     <!-- Footer -->
-                    <footer class="content-footer">
-                        <div>© 2020 Gogi - <a href="http://laborasyon.com" target="_blank">Laborasyon</a></div>
-                        <div>
-                            <nav class="nav">
-                                <a href="https://themeforest.net/licenses/standard" class="nav-link">Licenses</a>
-                                <a href="#" class="nav-link">Change Log</a>
-                                <a href="#" class="nav-link">Get Help</a>
-                            </nav>
-                        </div>
-                    </footer>
+                    <component-footer></component-footer>
                     <!-- ./ Footer -->
                 </div>
                 <!-- ./ Content body -->
@@ -1022,25 +1017,29 @@
         <!-- ./ Layout wrapper -->
     </div>
     <!-- vue app ends here -->
-    <!-- development version, includes helpful console warnings -->
+
+    <!-- Plugin scripts vendor and axios is global-->
+    <script src="public/vendors/bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"
+        integrity="sha512-VZ6m0F78+yo3sbu48gElK4irv2dzPoep8oo9LEjxviigcnnnNvnTOJRSrIhuFk68FMLOpiNz+T77nNY89rnWDg=="
+        crossorigin="anonymous"></script>
+    <script src="models/login_auth.js"></script>
+    <!-- Javascript -->
+    <script src="public/vendors/enjoyhint/enjoyhint.min.js"></script>
+
+    <!-- all component files are global -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
     <script src="components/settingsNotification.js"></script>
     <script src="components/topHeader.js"></script>
     <script src="components/navigation.js"></script>
-    <script>
-
-        var app = new Vue({
-            el: '#app',
-            data: {
-                message: 'Hello Vue!'
-            }
-        })
-    </script>
-    <script src="components/settingsNotification.js"></script>
-    <script src="components/topHeader.js"></script>
-
+    <script src="controllers/controller.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="controllers/home.js"></script>
     <!-- Main scripts -->
-    <script src="public/vendors/bundle.js"></script>
+
+    <!-- Twitter  -->
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 
     <!-- Apex chart -->
     <script src="public/vendors/charts/apex/apexcharts.min.js"></script>
@@ -1054,8 +1053,11 @@
     <!-- Dashboard scripts -->
     <script src="public/assets/js/examples/pages/dashboard.js"></script>
 
-    <!-- App scripts -->
+    <!-- App scripts global-->
     <script src="public/assets/js/app.min.js"></script>
+    <!-- end App scripts -->
+    <script src="public/vendors/fullcalendar/moment.min.js"></script>
+
 
 </body>
 

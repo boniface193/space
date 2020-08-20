@@ -1,4 +1,10 @@
 Vue.component('top-header', {
+    methods: {
+        logout() {
+            sessionStorage.removeItem('accessToken');
+            window.location.href = 'login.html';
+        }
+    },
     template: `            <!-- Header -->
             <div class="header d-print-none">
                 <div class="header-container">
@@ -10,115 +16,15 @@ Vue.component('top-header', {
                         </div>
 
                         <div class="header-logo">
+                        <!--pav logo-->
                             <a href=index.html>
-                                <img class="logo" src="public/assets/media/image/logo.png" alt="logo">
+                                <img class="logo" src="public/assets/media/image/pavspaceImg/white-logo.png" alt="logo" width="150px">
                             </a>
                         </div>
                     </div>
 
                     <div class="header-body">
-                        <div class="header-body-left">
-                            <ul class="navbar-nav">
-                                <li class="nav-item mr-3">
-                                    <div class="header-search-form">
-                                        <form>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <button class="btn">
-                                                        <i data-feather="search"></i>
-                                                    </button>
-                                                </div>
-                                                <input type="text" class="form-control" placeholder="Search">
-                                                <div class="input-group-append">
-                                                    <button class="btn header-search-close-btn">
-                                                        <i data-feather="x"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </li>
-                                <li class="nav-item dropdown d-none d-md-block">
-                                    <a href="#" class="nav-link" title="Apps" data-toggle="dropdown">Apps</a>
-                                    <div class="dropdown-menu dropdown-menu-big">
-                                        <div class="border-bottom px-4 py-3 text-center d-flex justify-content-between">
-                                            <h5 class="mb-0">Apps</h5>
-                                        </div>
-                                        <div class="p-3">
-                                            <div class="row row-xs">
-                                                <div class="col-6">
-                                                    <a href="chat.html">
-                                                        <div class="border-radius-1 text-center mb-3">
-                                                            <figure class="avatar avatar-lg border-0">
-                                                                <span
-                                                                    class="avatar-title bg-primary text-white rounded-circle">
-                                                                    <i class="width-30 height-30"
-                                                                        data-feather="message-circle"></i>
-                                                                </span>
-                                                            </figure>
-                                                            <div class="mt-2">Chat</div>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="col-6">
-                                                    <a href="mail.html">
-                                                        <div class="border-radius-1 text-center mb-3">
-                                                            <figure class="avatar avatar-lg border-0">
-                                                                <span
-                                                                    class="avatar-title bg-secondary text-white rounded-circle">
-                                                                    <i class="width-30 height-30"
-                                                                        data-feather="mail"></i>
-                                                                </span>
-                                                            </figure>
-                                                            <div class="mt-2">Mail</div>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="col-6">
-                                                    <a href="todo-list.html">
-                                                        <div class="border-radius-1 text-center">
-                                                            <figure class="avatar avatar-lg border-0">
-                                                                <span
-                                                                    class="avatar-title bg-info text-white rounded-circle">
-                                                                    <i class="width-30 height-30"
-                                                                        data-feather="check-circle"></i>
-                                                                </span>
-                                                            </figure>
-                                                            <div class="mt-2">Todo List</div>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="col-6">
-                                                    <a href="file-manager.html">
-                                                        <div class="border-radius-1 text-center">
-                                                            <figure class="avatar avatar-lg border-0">
-                                                                <span
-                                                                    class="avatar-title bg-warning text-white rounded-circle">
-                                                                    <i class="width-30 height-30"
-                                                                        data-feather="file"></i>
-                                                                </span>
-                                                            </figure>
-                                                            <div class="mt-2">File Manager</div>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="nav-item dropdown d-none d-md-block">
-                                    <a href="#" class="nav-link" title="Actions" data-toggle="dropdown">Create</a>
-                                    <div class="dropdown-menu">
-                                        <a href="#" class="dropdown-item">Add Products</a>
-                                        <a href="#" class="dropdown-item">Add Category</a>
-                                        <a href="#" class="dropdown-item">Add Report</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a href="#" class="dropdown-item">Reports</a>
-                                        <a href="#" class="dropdown-item">Customers</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+                        <div class="header-body-left"></div>
 
                         <div class="header-body-right">
                             <ul class="navbar-nav">
@@ -143,7 +49,7 @@ Vue.component('top-header', {
                                 </li>
 
                                 <li class="nav-item dropdown">
-                                    <a href="#" class="nav-link nav-link-notify" title="Notifications"
+                                    <a href="#" class="nav-link nav-link-notify notification" title="Notifications"
                                         data-toggle="dropdown">
                                         <i data-feather="bell"></i>
                                     </a>
@@ -383,7 +289,7 @@ Vue.component('top-header', {
                                     </a>
                                 </li>
 
-                                <li class="nav-item dropdown">
+                                <li class="nav-item dropdown settings">
                                     <a href="#" class="nav-link dropdown-toggle" title="User menu"
                                         data-toggle="dropdown">
                                         <figure class="avatar avatar-sm">
@@ -393,7 +299,7 @@ Vue.component('top-header', {
                                         <span class="ml-2 d-sm-inline d-none">Bony Gidden</span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-big">
-                                        <div class="text-center py-4">
+                                        <div class="text-center py-4 manageAcct">
                                             <figure class="avatar avatar-lg mb-3 border-0">
                                                 <img src="public/assets/media/image/user/man_avatar3.jpg"
                                                     class="rounded-circle" alt="image">
@@ -405,8 +311,7 @@ Vue.component('top-header', {
                                         </div>
                                         <div class="list-group">
                                             <a href="profile.html" class="list-group-item">View Profile</a>
-                                            <a href="http://bifor.laborasyon.com/login"
-                                                class="list-group-item text-danger" data-sidebar-target="#settings">Sign
+                                            <a href="" class="list-group-item text-danger" @click.prevent="logout()">Sign
                                                 Out!</a>
                                         </div>
                                         <div class="p-4">
