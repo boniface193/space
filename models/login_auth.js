@@ -3,3 +3,5 @@ const loginToken = '/users/token/obtain';
 const dashboard = '/common/dashboard/';
 const createUser = '/users/create/';
 const usersList = '/users/';
+const userInfo = '/users/info/extract/';
+const imageUpload = '/users/upload/picture/'
