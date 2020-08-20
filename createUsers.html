@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>First Pavilion Space Hub | Welcome</title>
+
+    <!-- Favicon global-->
+    <link rel="shortcut icon" href="public/assets/media/image/pavspaceImg/logo-only.png" />
+
+    <!-- Main css global-->
+    <link rel="stylesheet" href="public/vendors/bundle.css" type="text/css">
+
+    <!-- Google font global-->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- DataTable -->
+    <link rel="stylesheet" href="public/vendors/dataTable/datatables.min.css" type="text/css">
+
+    <!-- App css global-->
+    <link rel="stylesheet" href="public/assets/css/app.min.css" type="text/css">
+
+    <!-- Css -->
+    <link rel="stylesheet" href="public/vendors/enjoyhint/enjoyhint.css" type="text/css">
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body class="horizontal-navigation">
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-icon"></div>
+        <span>Loading...</span>
+    </div>
+    <!-- ./ Preloader -->
+
+    <!-- vue js app start here -->
+    <div id="app">
+
+        <!-- settings header notification -->
+        <settings-notification></settings-notification>
+
+        <!-- Layout wrapper -->
+        <div class="layout-wrapper">
+
+            <!-- topHeader for notification -->
+            <top-header></top-header>
+
+            <!-- Content wrapper -->
+            <div class="content-wrapper">
+
+                <!-- navigating menus -->
+                <navigating-bar></navigating-bar>
+                <!-- Content body -->
+                <div class="content-body">
+                    <!-- Content -->
+                    <div class="content">
+                        <div class="page-header d-md-flex justify-content-between">
+                            <div>
+                                <h3>Users</h3>
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item">
+                                            <a href="index.html">Home</a>
+                                        </li>
+                                        <li class="breadcrumb-item active" aria-current="page">Add Users
+                                        </li>
+                                    </ol>
+                                </nav>
+                            </div>
+                            <div class="mt-2 mt-md-0 addUser">
+                                <div>
+                                    <a class="btn btn-primary" href="user_add.html" data-toggle="modal" data-target="#createUser">
+                                        <i class="ti-settings mr-2"></i> Create Users Account
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h6 class="card-title">All Users</h6>
+                                        <div class="table-responsive">
+                                            <table id="orders" class="table userTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    id="orders-select-all">
+                                                                <label class="custom-control-label"
+                                                                    for="orders-select-all"></label>
+                                                            </div>
+                                                        </th>
+                                                        <th>Username</th>
+                                                        <th>Surname</th>
+                                                        <th>Other Names</th>
+                                                        <th>Phone</th>
+                                                        <th>Email</th>
+                                                        <th class="text-right">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr v-for="(user, index) in users" :key="user.id">
+                                                        <td>{{user.index}}</td>
+                                                        <td>{{user.username}}</td>
+                                                        <td>{{user.surname}}</td>
+                                                        <td>{{user.other_names}}</td>
+                                                        <td>{{user.phone}}</td>
+                                                        <td>{{user.email}}</td>
+                                                        <td>{{moment(user.date_joined).format('MMMM D, YYYY')}}</td>
+                                                        <td class="text-right">
+                                                            <div class="dropdown">
+                                                                <a href="orders.html#" data-toggle="dropdown"
+                                                                    class="btn btn-floating" aria-haspopup="true"
+                                                                    aria-expanded="false">
+                                                                    <i class="ti-more-alt"></i>
+                                                                </a>
+                                                                <div class="dropdown-menu dropdown-menu-right">
+                                                                    <a href="orders.html#"
+                                                                        class="dropdown-item">Edit</a>
+                                                                    <a href="orders.html#"
+                                                                        class="dropdown-item text-danger">Delete</a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ./ Content -->
+
+                    <!-- Footer -->
+                    <component-footer></component-footer>
+                    <!-- ./ Footer -->
+                </div>
+                <!-- ./ Content body -->
+            </div>
+            <!-- ./ Content wrapper -->
+        </div>
+        <!-- ./ Layout wrapper -->
+        <!-- modal for create user -->
+        <div class="modal fade" id="createUser" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Create User</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <i class="ti-close"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    <form class="needs-validation" @submit="createUser" novalidate>
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control" id="username" placeholder="Username" required v-model="username">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="password" placeholder="********" minlength="6" required v-model="password">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="surname">Surname</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="surname" placeholder="Surname" required v-model="surname">
+                                    <div class="invalid-feedback">
+                                        Please choose a Surname.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="otherNames">Other Name</label>
+                                <input type="text" class="form-control" id="OtherNames" placeholder="Other Name" required v-model="othernames">
+                                <div class="invalid-feedback">
+                                    Please provide a valid Name.
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" class="form-control" id="phone" placeholder="+234 903 ****" required v-model="phone">
+                                <div class="invalid-feedback">
+                                    Please provide a valid Phone Number.
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="Email">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Email" required v-model="email">
+                                <div class="invalid-feedback">
+                                    Please provide a valid Email
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                            </button>
+                            <button type="submit" class="btn btn-primary" type="submit">
+                                <div v-if="loading">
+                                    <div class="spinner-border text-white align-self-center spinner-border-sm ">
+                                    </div>
+                                </div>
+                                <div v-else>Add</div>
+                            </button>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- modal for create user ends here -->
+
+    </div>
+    <!-- vue app ends here -->
+
+    <!-- Plugin scripts bundle.js and axios are global-->
+    <script src="public/vendors/bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"
+        integrity="sha512-VZ6m0F78+yo3sbu48gElK4irv2dzPoep8oo9LEjxviigcnnnNvnTOJRSrIhuFk68FMLOpiNz+T77nNY89rnWDg=="
+        crossorigin="anonymous"></script>
+    <script src="models/login_auth.js"></script>
+    
+    <!-- Javascript -->
+    <script src="public/vendors/enjoyhint/enjoyhint.min.js"></script>
+
+    <!-- all component files are global -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <script src="components/settingsNotification.js"></script>
+    <script src="components/topHeader.js"></script>
+    <script src="components/navigation.js"></script>
+    <script src="controllers/controller.js"></script>
+    <script src="components/footer.js"></script>
+    <!-- controllers are not global -->
+    <script src="controllers/createUsers.js"></script>
+    <!-- Main scripts -->
+
+    <!-- DataTable -->
+    <script src="public/vendors/dataTable/datatables.min.js"></script>
+
+    <script src="public/assets/js/examples/pages/orders.js"></script>
+    <script src="models/formValidate.js"></script>
+    <!-- App scripts global-->
+    <script src="public/assets/js/app.min.js"></script>
+    <!-- end App scripts -->
+    <script src="public/vendors/fullcalendar/moment.min.js"></script>
+
+
+</body>
+
+</html>

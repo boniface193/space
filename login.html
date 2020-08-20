@@ -34,6 +34,12 @@
             </div>
             <!-- ./ logo -->
 
+            <div class="alert alert-danger alert-dismissible fade show" v-for="error in errors" role="alert">{{error}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
             <h5>
                 Login
             </h5>
@@ -71,22 +77,26 @@
                 <p class="text-muted">Login with your social media account.</p>
                 <ul class="list-inline">
                     <li class="list-inline-item">
-                        <a href="https://facebook.com/firstpavilionng" target="_blank" class="btn btn-floating btn-facebook">
+                        <a href="https://facebook.com/firstpavilionng" target="_blank"
+                            class="btn btn-floating btn-facebook">
                             <i data-feather="facebook"></i>
                         </a>
                     </li>
                     <li class="list-inline-item">
-                        <a href="https://twitter.com/@firstpavilionng" target="_blank" class="btn btn-floating btn-twitter">
+                        <a href="https://twitter.com/@firstpavilionng" target="_blank"
+                            class="btn btn-floating btn-twitter">
                             <i data-feather="twitter"></i>
                         </a>
                     </li>
                     <li class="list-inline-item">
-                        <a href="https://linkedin.com/company/first-pavilion/" target="_blank" class="btn btn-floating btn-linkedin">
+                        <a href="https://linkedin.com/company/first-pavilion/" target="_blank"
+                            class="btn btn-floating btn-linkedin">
                             <i data-feather="linkedin"></i>
                         </a>
                     </li>
                     <li class="list-inline-item">
-                        <a href="https://instagram.com/firstpavilionng" target="_blank" class="btn btn-floating btn-instagram">
+                        <a href="https://instagram.com/firstpavilionng" target="_blank"
+                            class="btn btn-floating btn-instagram">
                             <i data-feather="instagram"></i>
                         </a>
                     </li>

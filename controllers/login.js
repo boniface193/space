@@ -3,16 +3,14 @@ const app = new Vue({
     data: {
         username: '',
         password: '',
-        // errors: '',
         loading: false,
+        errors: [],
     },
 
     methods: {
         loginUsers() {
-            // this.errors = []
             this.loading = true;
-
-            axios.post(Base_URL + '/users/token/obtain', {
+            axios.post(Base_URL + loginToken, {
                 username: this.username,
                 password: this.password,
             })
@@ -20,13 +18,13 @@ const app = new Vue({
                     data = response.data;
                     sessionStorage.setItem('accessToken', data.access);
                     sessionStorage.setItem('refreshToken', data.refresh);
-                    if (data.is_superuser) {
-                        sessionStorage.setItem('is_superuser', JSON.stringify(data.is_superuser));
-                        window.location.href = 'admin.html';
-                    } else{
-                        window.location.href = 'index.html';
-                    }
-                     
+                   if (data.is_superuser === true || !data.is_superuser) {
+                       sessionStorage.setItem('is_superuser', JSON.stringify(data.is_superuser));
+                       window.location.href = 'index.html';
+                   }else{
+                       this.errors.push('You do not have access to login');
+                   }
+                    this.loading = false;
                 })
                 .catch((error) => {
                     errorData = error.response;

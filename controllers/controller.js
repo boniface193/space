@@ -11,13 +11,3 @@ const toast = () => {
         };
     });
 };
-
-// // function for dashboard movie
-// const movie = () => {
-
-// }
-
-// // function for dashboard payment history
-// const payHistory = () => {
-
-// }
