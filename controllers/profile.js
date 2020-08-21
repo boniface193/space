@@ -23,7 +23,10 @@ const app = new Vue({
         instagramhandle: "",
         twitterhandle: "",
         facebookhandle: "",
-        linkedinhandle: ""
+        linkedinhandle: "",
+
+        is_superuser: JSON.parse(sessionStorage.getItem("is_superuser")),
+        images: null
         
     },
 
@@ -74,7 +77,64 @@ const app = new Vue({
     },
 
     methods: {
-        
+        downloadCSV() {
+            axios.get(Base_URL + userInfo, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
+                },
+                // responseType: 'blob'
+            }).then(response => {
+                downloadLink = response.data
+                console.log(downloadLink);
+                //const fileURL = window.URL.createObjectURL(new Blob([downloadLink]));
+                const fileLink = document.createElement('a');
+                fileLink.href = downloadLink['download_link'];
+                fileLink.setAttribute('download', 'userInfo.csv');
+                document.body.appendChild(fileLink);
+                fileLink.click();
+                
+            }).catch((error) => {
+                errorData = error.response;
+                toast(toastr.error(error));
+                toast(toastr.error(errorData.data.detail));
+            })
+        },
+        encodeImageFileAsURL: function (e) {
+                let image = e.target.files[0]
+                let reader = new FileReader();
+                reader.readAsDataURL(image);
+                reader.onload = e => {
+                    var b64 = reader.result.replace(/^data:.+;base64,/, '');
+                    this.users.image = e.target.result
+                    this.images = b64;
+                }
+                reader.onerror = function(error) {
+                    toast(toastr.error(error));
+                };
+
+        },
+        uploadImage() {
+            axios.post(Base_URL + imageUpload, {
+                'image': this.images,
+                
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
+                }
+            }).then(response => {
+                // images = response.data.image
+                success = response.data.image;
+                toast(toastr.success('Upload Successful'));
+                console.log(response.data);
+
+            }).catch((error) => {
+                errorData = error.response;
+                toast(toastr.error(error));
+                toast(toastr.error(errorData.data.detail));
+            })
+        }   
     }
 
 })

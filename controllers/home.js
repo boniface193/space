@@ -24,17 +24,17 @@ const app = new Vue({
 
     mounted() {
         // dashboard tour
-        let enjoyhint_instance = new EnjoyHint({});
+        // let enjoyhint_instance = new EnjoyHint({});
 
-        enjoyhint_instance.set([
-            {
-                'click .settings': '<text style="font-family: cursive; color: yellow">Click to see how to change your settings</text>'
-            },
-            {
-                'next .navigation': '<text style="font-family: cursive; color: yellow">Navigation bars to navigate through the pages.</text>',
-            },
-        ]);
-        enjoyhint_instance.run();
+        // enjoyhint_instance.set([
+        //     {
+        //         'click .settings': '<text style="font-family: cursive; color: yellow">Click to see how to change your settings</text>'
+        //     },
+        //     {
+        //         'next .navigation': '<text style="font-family: cursive; color: yellow">Navigation bars to navigate through the pages.</text>',
+        //     },
+        // ]);
+        // enjoyhint_instance.run();
 
         if (sessionStorage.getItem("accessToken") === null) {
             sessionStorage.removeItem('accessToken');
