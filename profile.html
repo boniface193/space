@@ -102,12 +102,13 @@
                                                             <div class="d-flex mb-3">
                                                                 <figure class="mr-3">
                                                                     <img width="100" class="rounded-pill"
-                                                                        src="public/assets/media/image/user/women_avatar1.jpg"
-                                                                        alt="...">
+                                                                        :src="users.image"
+                                                                        alt="Users Image" id="imagePreview">
                                                                 </figure>
                                                                 <div>
-                                                                    <p>Roxana Roussell</p>
-                                                                    <button class="btn btn-outline-light mr-2">Change
+                                                                    <p>{{users.username}}</p>
+                                                                    <input type='file' id="imageUpload" class="d-none" accept=".png, .jpg, .jpeg" />
+                                                                    <button class="btn btn-outline-light mr-2" @click.prevent="$imageUpload">Change
                                                                         Avatar</button>
                                                                     <button class="btn btn-outline-danger">Remove
                                                                         Avatar</button>
@@ -479,6 +480,7 @@
     <!-- profile  js -->
     <script src="controllers/profile.js"></script>
     <script src="models/formValidate.js"></script>
+    <script src="models/imageUpload.js"></script>
     <!-- App scripts global-->
     <script src="public/assets/js/app.min.js"></script>
     <!-- end App scripts -->

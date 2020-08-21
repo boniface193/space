@@ -1,7 +1,7 @@
 const app = new Vue({
     el: '#app',
     data: {
-        // users: [],
+        users: [],
         surname: "",
         othernames: "",
         gender: "",
@@ -35,7 +35,9 @@ const app = new Vue({
             }
         })
         .then(response => {
+            console.log(data)
             data = response.data,
+            this.users = data,
             this.surname = data.surname,
             this.othernames = data.other_names,
             this.gender = data.gender,
@@ -62,13 +64,12 @@ const app = new Vue({
 
         })
         .catch(error => {
-            console.error(error)
             toast(toastr.error(error));
             // if (error.response.status == 401 || 403) {
             //     sessionStorage.removeItem('accessToken');
             //     window.location.href = 'login.html';
             // }
-            console.log(error)
+            console.log(error.response)
         })
     },
 

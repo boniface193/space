@@ -1,4 +1,24 @@
 Vue.component('top-header', {
+    data() {
+        return {
+           users: [] 
+        }
+        
+    },
+
+    mounted() {
+        axios.get(Base_URL + usersList, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
+            }
+        })
+        .then(response => {
+            data = response.data,
+            this.users = data
+        })
+    },
+
     methods: {
         logout() {
             sessionStorage.removeItem('accessToken');
@@ -293,7 +313,7 @@ Vue.component('top-header', {
                                     <a href="#" class="nav-link dropdown-toggle" title="User menu"
                                         data-toggle="dropdown">
                                         <figure class="avatar avatar-sm">
-                                            <img src="public/assets/media/image/user/man_avatar3.jpg"
+                                            <img :src="users.image"
                                                 class="rounded-circle" alt="avatar">
                                         </figure>
                                         <span class="ml-2 d-sm-inline d-none">Bony Gidden</span>
@@ -301,7 +321,7 @@ Vue.component('top-header', {
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-big">
                                         <div class="text-center py-4 manageAcct">
                                             <figure class="avatar avatar-lg mb-3 border-0">
-                                                <img src="public/assets/media/image/user/man_avatar3.jpg"
+                                                <img :src="users.image"
                                                     class="rounded-circle" alt="image">
                                             </figure>
                                             <h5 class="text-center">Bony Gidden</h5>

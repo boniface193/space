@@ -2,6 +2,7 @@ Vue.component('settings-notification', {
     data: function () {
         return {
             users: [],
+            lastLogin: '',
         }
     },
 
@@ -15,12 +16,9 @@ Vue.component('settings-notification', {
         .then(response => {
             data = response.data
             this.users = data
-            console.log(data)
-
-
+            this.lastLogin = moment(data.last_login).format('MMMM D, YYYY')
         })
         .catch(error => {
-            console.error(error)
             toast(toastr.error(error.response.data.detail));
             if (error.response.status == 401 || 403) {
                 sessionStorage.removeItem('accessToken');
@@ -110,7 +108,7 @@ Vue.component('settings-notification', {
                                     <span class="text-muted" v-else>{{users.surname}}</span>
                                 </div>
                                 <div class="text-right ml-auto d-flex flex-column">
-                                    <span class="small text-muted">{{moment(users.last_login).format('MMMM D, YYYY')}}</span>
+                                    <span class="small text-muted">{{lastLogin}}</span>
                                 </div>
                             </a>
                             <a href="chat.html" class="list-group-item px-0 d-flex align-items-start">
