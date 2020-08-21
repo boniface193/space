@@ -101,13 +101,14 @@
                                                             <h6 class="card-title">Your Profile</h6>
                                                             <div class="d-flex mb-3">
                                                                 <figure class="mr-3">
-                                                                    <img width="100" class="rounded-pill"
-                                                                        :src="users.image"
+                                                                    <img v-if="!users.image" width="100" class="rounded-pill"
+                                                                        src="public/assets/media/image/pavspaceImg/logo-only.png"
                                                                         alt="Users Image" id="imagePreview">
+                                                                    <img v-else width="100" class="rounded-pill" :src="users.image" alt="Users Image" id="imagePreview">
                                                                 </figure>
                                                                 <div>
                                                                     <p>{{users.username}}</p>
-                                                                    <input type='file' id="imageUpload" class="d-none" accept=".png, .jpg, .jpeg" />
+                                                                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
                                                                     <button class="btn btn-outline-light mr-2" @click.prevent="$imageUpload">Change
                                                                         Avatar</button>
                                                                     <button class="btn btn-outline-danger">Remove
