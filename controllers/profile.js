@@ -1,7 +1,7 @@
 const app = new Vue({
     el: '#app',
     data: {
-        // users: [],
+        users: [],
         surname: "",
         othernames: "",
         gender: "",
@@ -26,7 +26,7 @@ const app = new Vue({
         linkedinhandle: "",
 
         is_superuser: JSON.parse(sessionStorage.getItem("is_superuser")),
-        images: false
+        images: null
         
     },
 
@@ -38,7 +38,9 @@ const app = new Vue({
             }
         })
         .then(response => {
+            console.log(data)
             data = response.data,
+            this.users = data,
             this.surname = data.surname,
             this.othernames = data.other_names,
             this.gender = data.gender,
@@ -65,13 +67,12 @@ const app = new Vue({
 
         })
         .catch(error => {
-            console.error(error)
             toast(toastr.error(error));
             // if (error.response.status == 401 || 403) {
             //     sessionStorage.removeItem('accessToken');
             //     window.location.href = 'login.html';
             // }
-            console.log(error)
+            console.log(error.response)
         })
     },
 
@@ -99,15 +100,19 @@ const app = new Vue({
                 toast(toastr.error(errorData.data.detail));
             })
         },
-        encodeImageFileAsURL: function () {
-                var element = document.getElementById("fileImage");
-                var file = element.files[0];
-                var reader = new FileReader();
-                reader.onloadend = () => {
-                var b64 = reader.result.replace(/^data:.+;base64,/, '');
-                this.images = b64;
-            }
-            reader.readAsDataURL(file);
+        encodeImageFileAsURL: function (e) {
+                let image = e.target.files[0]
+                let reader = new FileReader();
+                reader.readAsDataURL(image);
+                reader.onload = e => {
+                    var b64 = reader.result.replace(/^data:.+;base64,/, '');
+                    this.users.image = e.target.result
+                    this.images = b64;
+                }
+                reader.onerror = function(error) {
+                    toast(toastr.error(error));
+                };
+
         },
         uploadImage() {
             axios.post(Base_URL + imageUpload, {
@@ -117,11 +122,6 @@ const app = new Vue({
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
-                }
-            },
-            {
-                onUploadProgress: uploadEvent => {
-                    console.log('uploadProgress' + Math.round(uploadEvent.loaded / uploadEvent.total * 100 + '%'))
                 }
             }).then(response => {
                 // images = response.data.image

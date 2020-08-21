@@ -104,23 +104,18 @@
                                                             <h6 class="card-title">Your Profile</h6>
                                                             <div class="d-flex mb-3">
                                                                 <figure class="mr-3">
-                                                                    <img width="100" class="rounded-pill"
-                                                                        src="public/assets/media/image/user/women_avatar1.jpg"
-                                                                        alt="...">
+                                                                    <img v-if="!users.image" width="100" height="100" class="rounded-pill"
+                                                                        src="public/assets/media/image/pavspaceImg/logo-only.png"
+                                                                        alt="Users Image" id="imagePreview">
+                                                                    <img v-else width="100" height="100" class="rounded-pill" :src="users.image" alt="Users Image" id="imagePreview">
                                                                 </figure>
-                                                                <div class="image__uplaod" style="position: relative; overflow: hidden">
-                                                                    <p>Roxana Roussell</p>
-                                                                    <input type="file" style="display: none;" ref="fileInput" id="fileImage" v-on:change.prevent="encodeImageFileAsURL()" accept="image/*">
-                                                                    <button type="button" @click="$refs.fileInput.click()" class="btn btn-outline-light mr-2">Select Picture</button>
-                                                                    <button type="button"  @click="uploadImage" class="btn btn-outline-light mr-2">Change Avatar</button>
-
-                                                                    <button class="btn btn-outline-danger">Remove
-                                                                        Avatar</button>
-                                                                    <p class="small text-muted mt-3">For best results,
-                                                                        use
-                                                                        an
-                                                                        image at least
-                                                                        256px by 256px in either .jpg or .png format</p>
+                                                                <div>
+                                                                    <p>{{users.username}}</p>
+                                                                    <input type='file' @change="encodeImageFileAsURL" style="display: none;" ref="fileInput" accept=".png, .jpg, .jpeg" />
+                                                                    <button type="button" @click="$refs.fileInput.click()" style="border: 0;" class="btn btn-outline-light mr-2">Choose File</button>
+                                                                    <button class="btn btn-outline-light mr-2" @click.prevent="uploadImage">Upload Image</button>
+                                                                    <!-- <button class="btn btn-outline-danger">Remove Avatar</button> -->
+                                                                    <p class="small text-muted mt-3">For best results, use an image at least 256px by 256px in either .jpg or .png format</p>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
@@ -484,6 +479,7 @@
     <!-- profile  js -->
     <script src="controllers/profile.js"></script>
     <script src="models/formValidate.js"></script>
+    <!-- <script src="models/imageUpload.js"></script> -->
     <!-- App scripts global-->
     <script src="public/assets/js/app.min.js"></script>
     <!-- end App scripts -->
