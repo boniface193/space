@@ -82,13 +82,13 @@ const app = new Vue({
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
                 },
-                responseType: 'blob'
+                // responseType: 'blob'
             }).then(response => {
                 downloadLink = response.data
-
-                const fileURL = window.URL.createObjectURL(new Blob([downloadLink]));
+                console.log(downloadLink);
+                //const fileURL = window.URL.createObjectURL(new Blob([downloadLink]));
                 const fileLink = document.createElement('a');
-                fileLink.href = fileURL;
+                fileLink.href = downloadLink['download_link'];
                 fileLink.setAttribute('download', 'userInfo.csv');
                 document.body.appendChild(fileLink);
                 fileLink.click();
