@@ -48,7 +48,6 @@ const app = new Vue({
             })
             .then(response => {
                 profile = response.data.profile;
-                console.log(profile)
                 this.showModal = profile.plan == null ? true : false;
                 this.date = moment(profile.date_joined).format('MMMM D, YYYY');
                 toast(toastr.success(`Welcome ${profile.username}!`));
@@ -68,7 +67,6 @@ const app = new Vue({
                 this.plan = profile.plan;
             })
             .catch(error => {
-                console.error(error)
                 toast(toastr.error(error.response.data.detail));
                 if (error.response.status == 401 || 403) {
                     sessionStorage.removeItem('accessToken');
@@ -81,11 +79,16 @@ const app = new Vue({
 
     methods: {
         downloadFile() {
-            let blob = new Blob([profile.agreement_link], { "type": "pdf/plain" });
-            let link = document.createElement('a')
-            link.href = window.URL.createObjectURL(blob)
-            link.download = profile.agreement_link
-            link.click()
+            if (this.fileDownload == null) {
+                toast(toastr.warning('Nothing to download'));
+            } else {
+                const fileLink = document.createElement('a');
+                fileLink.href = this.fileDownload;
+                fileLink.setAttribute('download', 'agreement.pdf');
+                document.body.appendChild(fileLink);
+                fileLink.click();
+                toast(toastr.success('Successfully downloaded'));
+            }
         }
     },
 
