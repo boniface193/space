@@ -68,23 +68,23 @@
                                 </nav>
                             </div>
                             <div class="mt-3 mt-md-0" v-if="is_superuser">
-                                <button type="button" @click="downloadCSV" class="btn btn-primary ml-0 ml-md-2 mt-2 mt-md-0">Download</button>
+                                <button type="button" @click="downloadCSV"
+                                    class="btn btn-primary ml-0 ml-md-2 mt-2 mt-md-0">Download</button>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 col-sm-3">
                                         <div class="nav nav-pills flex-column" id="v-pills-tab" role="tablist"
                                             aria-orientation="vertical">
                                             <a class="nav-item nav-link active" id="v-pills-home-tab" data-toggle="pill"
                                                 href="#v-pills-home" role="tab" aria-controls="v-pills-home"
-                                                aria-selected="true">Your
-                                                Profile</a>
+                                                aria-selected="true">Profile Image</a>
                                             <a class="nav-item nav-link" id="v-pills-profile-tab" data-toggle="pill"
                                                 href="#v-pills-profile" role="tab" aria-controls="v-pills-profile"
-                                                aria-selected="false">Password</a>
+                                                aria-selected="false">Profile Information</a>
                                             <a class="nav-item nav-link" id="v-pills-messages-tab" data-toggle="pill"
                                                 href="#v-pills-messages" role="tab" aria-controls="v-pills-messages"
                                                 aria-selected="false">Email
@@ -94,30 +94,61 @@
                                                 aria-selected="false">Integrations</a>
                                         </div>
                                     </div>
-                                    <div class="col-md-9">
+                                    <div class="col-md-9 col-sm-9">
                                         <div class="tab-content" id="v-pills-tabContent">
                                             <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
                                                 aria-labelledby="v-pills-home-tab">
-                                                <form action="">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <h6 class="card-title">Your Profile</h6>
-                                                            <div class="d-flex mb-3">
-                                                                <figure class="mr-3">
-                                                                    <img v-if="!users.image" width="100" height="100" class="rounded-pill"
-                                                                        src="public/assets/media/image/pavspaceImg/logo-only.png"
-                                                                        alt="Users Image" id="imagePreview">
-                                                                    <img v-else width="100" height="100" class="rounded-pill" :src="users.image" alt="Users Image" id="imagePreview">
-                                                                </figure>
-                                                                <div>
-                                                                    <p>{{users.username}}</p>
-                                                                    <input type='file' @change="encodeImageFileAsURL" style="display: none;" ref="fileInput" accept=".png, .jpg, .jpeg" />
-                                                                    <button type="button" @click="$refs.fileInput.click()" style="border: 0;" class="btn btn-outline-light mr-2">Choose File</button>
-                                                                    <button class="btn btn-outline-light mr-2" @click.prevent="uploadImage">Upload Image</button>
-                                                                    <!-- <button class="btn btn-outline-danger">Remove Avatar</button> -->
-                                                                    <p class="small text-muted mt-3">For best results, use an image at least 256px by 256px in either .jpg or .png format</p>
+
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">Your Profile Image</h6>
+                                                        <div class="d-flex mb-3">
+                                                            <div class="row">
+                                                                <div class="col-sm-3">
+                                                                    <figure class="mr-3">
+                                                                        <img v-if="!users.image" width="100"
+                                                                            height="100" class="rounded-pill"
+                                                                            src="public/assets/media/image/pavspaceImg/logo-only.png"
+                                                                            alt="Users Image" id="imagePreview">
+                                                                        <img v-else width="100" height="100"
+                                                                            class="rounded-pill" :src="users.image"
+                                                                            alt="Users Image" id="imagePreview">
+                                                                    </figure>
+
+                                                                </div>
+                                                                <div class="col-sm-9">
+                                                                    <div>
+                                                                        <div
+                                                                            class="font-weight-bold text-uppercase ml-3">
+                                                                            {{users.username}}</div>
+                                                                        <input type='file'
+                                                                            @change="encodeImageFileAsURL"
+                                                                            style="display: none;" ref="fileInput"
+                                                                            accept=".png, .jpg, .jpeg" />
+                                                                        <button type="button"
+                                                                            @click="$refs.fileInput.click()"
+                                                                            style="border: 0;"
+                                                                            class="btn btn-outline-light mr-2">Choose
+                                                                            File</button>
+                                                                        <button class="btn btn-outline-info mr-2"
+                                                                            @click.prevent="uploadImage">Upload
+                                                                            Image</button>
+                                                                        <p class="small text-muted mt-3">For best
+                                                                            results, use
+                                                                            an image at least 256px by 256px in either
+                                                                            .jpg or
+                                                                            .png format</p>
+                                                                    </div>
                                                                 </div>
                                                             </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <form action="" @submit.prevent="profileSubmit();">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h6 class="card-title">Profile User Information</h6>
                                                             <div class="row">
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">
@@ -158,6 +189,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h6 class="card-title">Contact</h6>
@@ -165,150 +197,148 @@
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">
                                                                         <label>Gender</label>
-                                                                        <input type="text" class="form-control" placeholder="Gender" v-model="gender">
+                                                                        <input type="text" class="form-control"
+                                                                            placeholder="Gender" v-model="gender">
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label>Phone</label>
-                                                                        <input type="tel" class="form-control" placeholder="+234 903 **** ***" v-model="phone">
+                                                                        <input type="tel" class="form-control"
+                                                                            placeholder="+234 903 **** ***"
+                                                                            v-model="phone">
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <label>Website</label>
+                                                                        <label>Address</label>
                                                                         <input type="text" class="form-control"
-                                                                            value="http://laborasyon.com/">
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label>Languages</label>
-                                                                        <input type="text" class="form-control"
-                                                                            value="http://laborasyon.com/">
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <p>Gender</p>
-                                                                        <div
-                                                                            class="custom-control custom-radio custom-control-inline">
-                                                                            <input type="radio" id="customRadio1"
-                                                                                name="customRadio"
-                                                                                class="custom-control-input">
-                                                                            <label class="custom-control-label"
-                                                                                for="customRadio1">Male</label>
-                                                                        </div>
-                                                                        <div
-                                                                            class="custom-control custom-radio custom-control-inline">
-                                                                            <input type="radio" id="customRadio2"
-                                                                                name="customRadio"
-                                                                                class="custom-control-input">
-                                                                            <label class="custom-control-label"
-                                                                                for="customRadio2">Female</label>
-                                                                        </div>
-                                                                        <div
-                                                                            class="custom-control custom-radio custom-control-inline">
-                                                                            <input type="radio" id="customRadio3"
-                                                                                name="customRadio"
-                                                                                class="custom-control-input">
-                                                                            <label class="custom-control-label"
-                                                                                for="customRadio3">Other</label>
-                                                                        </div>
+                                                                            placeholder="A-65, Belvedere Streets"
+                                                                            v-model="address">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">
-                                                                        <label>Address Line 1</label>
+                                                                        <label>Kin Address</label>
                                                                         <input type="text" class="form-control"
-                                                                            value="A-65, Belvedere Streets">
+                                                                            placeholder="A-65, Belvedere Streets"
+                                                                            v-model="kinaddress">
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <label>Address Line 2</label>
-                                                                        <input type="text" class="form-control"
-                                                                            value="">
+                                                                        <label>Kin Phone Number</label>
+                                                                        <input type="tel" class="form-control"
+                                                                            placeholder="+234 903 **** ***"
+                                                                            v-mode="kinphone">
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <label>Post Code</label>
+                                                                        <label>Kin Name</label>
                                                                         <input type="text" class="form-control"
-                                                                            value="1868">
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label>City</label>
-                                                                        <input type="text" class="form-control"
-                                                                            value="New York">
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label>State</label>
-                                                                        <input type="text" class="form-control"
-                                                                            value="New York">
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label>Country</label>
-                                                                        <input type="text" class="form-control"
-                                                                            value="United States">
+                                                                            placeholder="Kin Name" v-model="kinname">
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <button class="btn btn-primary">Save</button>
+                                                            <div class="form-group">
+                                                                <label>Nature Of Work</label>
+                                                                <input type="text" class="form-control"
+                                                                    placeholder="Freelancer" v-model="worknature">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card" v-if="student">
+                                                        <div class="card-body">
+                                                            <h6 class="card-title">Student Information</h6>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label>School Name</label>
+                                                                        <input type="text" class="form-control" placeholder="Freelancer" v-model="schoolname">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>School Address</label>
+                                                                        <input type="text" class="form-control" placeholder="Freelancer" v-model="schooladdress">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label>Student Course</label>
+                                                                        <input type="text" class="form-control" placeholder="Freelancer" v-model="studentcourse">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Student Level</label>
+                                                                        <input type="text" class="form-control" placeholder="Freelancer" v-model="studentlevel">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="card">
                                                         <div class="card-body">
                                                             <h6 class="card-title">Social</h6>
-                                                            <form>
-                                                                <div class="row">
-                                                                    <div class="col-md-6">
-                                                                        <div class="form-group">
-                                                                            <label>Twitter</label>
-                                                                            <input type="text" class="form-control"
-                                                                                value="https://twitter.com/roxana-roussell">
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label>Facebook</label>
-                                                                            <input type="text" class="form-control"
-                                                                                value="https://www.facebook.com/roxana-roussell">
-                                                                        </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label>Twitter</label>
+                                                                        <input type="text" class="form-control"
+                                                                            placeholder="https://twitter.com/roxana-roussell" v-model="twitterhandle">
                                                                     </div>
-                                                                    <div class="col-md-6">
-                                                                        <div class="form-group">
-                                                                            <label>Instagram</label>
-                                                                            <input type="text" class="form-control"
-                                                                                value="https://www.instagram.com/roxana-roussell/">
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label>GitHub</label>
-                                                                            <input type="text" class="form-control"
-                                                                                value="https://github.com/roxana-roussell">
-                                                                        </div>
+                                                                    <div class="form-group">
+                                                                        <label>Facebook</label>
+                                                                        <input type="text" class="form-control"
+                                                                            placeholder="https://www.facebook.com/roxana-roussell" v-model="facebookhandle">
                                                                     </div>
                                                                 </div>
-                                                                <button class="btn btn-primary">Save</button>
-                                                            </form>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label>Instagram</label>
+                                                                        <input type="text" class="form-control"
+                                                                            placeholder="https://www.instagram.com/roxana-roussell/" v-model="instagramhandle">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Linkedin</label>
+                                                                        <input type="text" class="form-control"
+                                                                            placeholder="https://linkedin.com/roxana-roussell" v-model="linkedinhandle">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <button type="submit" class="btn btn-primary">Save</button>
                                                         </div>
                                                     </div>
                                                 </form>
 
                                             </div>
+
                                             <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
                                                 aria-labelledby="v-pills-profile-tab">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <h6 class="card-title">Password</h6>
-                                                        <form>
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <div class="form-group">
-                                                                        <label>Old Password</label>
-                                                                        <input type="password" class="form-control">
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label>New Password</label>
-                                                                        <input type="password" class="form-control">
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label>New Password Repeat</label>
-                                                                        <input type="password" class="form-control">
-                                                                    </div>
+                                                        <h6 class="card-title">Social</h6>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label>Twitter</label>
+                                                                    <input type="text" class="form-control"
+                                                                        value="https://twitter.com/roxana-roussell">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Facebook</label>
+                                                                    <input type="text" class="form-control"
+                                                                        value="https://www.facebook.com/roxana-roussell">
                                                                 </div>
                                                             </div>
-                                                            <button class="btn btn-primary">Save</button>
-                                                        </form>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label>Instagram</label>
+                                                                    <input type="text" class="form-control"
+                                                                        value="https://www.instagram.com/roxana-roussell/">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>GitHub</label>
+                                                                    <input type="text" class="form-control"
+                                                                        value="https://github.com/roxana-roussell">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-primary">Save</button>
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
                                                 aria-labelledby="v-pills-messages-tab">
                                                 <div class="card">
@@ -479,7 +509,6 @@
     <!-- profile  js -->
     <script src="controllers/profile.js"></script>
     <script src="models/formValidate.js"></script>
-    <!-- <script src="models/imageUpload.js"></script> -->
     <!-- App scripts global-->
     <script src="public/assets/js/app.min.js"></script>
     <!-- end App scripts -->
