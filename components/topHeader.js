@@ -314,7 +314,7 @@ Vue.component('top-header', {
                                         data-toggle="dropdown">
                                         <figure class="avatar avatar-sm">
                                         <img v-if="!users.image" width="100" class="rounded-pill"
-                                            src="public/assets/media/image/pavspaceImg/logo-only.png"
+                                            src="public/assets/media/image/pavspaceImg/avatar.png"
                                             alt="Users Image" id="imagePreview">
                                             <img v-else :src="users.image"
                                                 class="rounded-circle" alt="avatar">
@@ -325,7 +325,7 @@ Vue.component('top-header', {
                                         <div class="text-center py-4 manageAcct">
                                             <figure class="avatar avatar-lg mb-3 border-0">
                                             <img v-if="!users.image" width="100" class="rounded-pill"
-                                                src="public/assets/media/image/pavspaceImg/logo-only.png"
+                                                src="public/assets/media/image/pavspaceImg/avatar.png"
                                                 alt="Users Image" id="imagePreview">
                                             <img v-else :src="users.image"
                                                     class="rounded-circle" alt="image">
