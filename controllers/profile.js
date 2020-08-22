@@ -26,7 +26,11 @@ const app = new Vue({
         linkedinhandle: "",
 
         is_superuser: JSON.parse(sessionStorage.getItem("is_superuser")),
-        images: null
+        images: null,
+        loading: false,
+
+        customerUsername: '',
+        customerDate: ''
         
     },
 
@@ -72,7 +76,7 @@ const app = new Vue({
             //     sessionStorage.removeItem('accessToken');
             //     window.location.href = 'login.html';
             // }
-            console.log(error.response)
+            // console.log(error.response)
         })
     },
 
@@ -86,7 +90,6 @@ const app = new Vue({
                 // responseType: 'blob'
             }).then(response => {
                 downloadLink = response.data
-                console.log(downloadLink);
                 //const fileURL = window.URL.createObjectURL(new Blob([downloadLink]));
                 const fileLink = document.createElement('a');
                 fileLink.href = downloadLink['download_link'];
@@ -115,6 +118,7 @@ const app = new Vue({
 
         },
         uploadImage() {
+            this.loading = true;
             axios.post(Base_URL + imageUpload, {
                 'image': this.images,
                 
@@ -125,16 +129,42 @@ const app = new Vue({
                 }
             }).then(response => {
                 // images = response.data.image
+                this.loading = false
                 success = response.data.image;
                 toast(toastr.success('Upload Successful'));
-                console.log(response.data);
 
             }).catch((error) => {
                 errorData = error.response;
                 toast(toastr.error(error));
                 toast(toastr.error(errorData.data.detail));
+                this.loading = false
             })
-        }   
+        },
+        saveCustomer() {
+            this.loading = true;
+            axios.post(Base_URL + customer_URL, {
+                'username': this.customerUsername,
+                'date': this.customerDate
+                
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
+                }
+            }).then(response => {
+                this.loading = false;
+                this.customerUsername = '';
+                this.customerDate = '';
+                success = response.data;
+                toast(toastr.success('Saved Successful'));
+
+            }).catch((error) => {
+                errorData = error.response;
+                toast(toastr.error(error));
+                toast(toastr.error("Kindly fill all feilds"));
+                this.loading = false
+            })
+        }
     }
 
 })
