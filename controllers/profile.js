@@ -26,8 +26,12 @@ const app = new Vue({
         linkedinhandle: "",
 
         is_superuser: JSON.parse(sessionStorage.getItem("is_superuser")),
-        images: null
+        images: null,
+        loading: false,
 
+        customerUsername: '',
+        customerDate: ''
+        
     },
 
     mounted() {
@@ -82,7 +86,8 @@ const app = new Vue({
                     'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
                 },
             }).then(response => {
-                downloadLink = response.data;
+                downloadLink = response.data
+                //const fileURL = window.URL.createObjectURL(new Blob([downloadLink]));
                 const fileLink = document.createElement('a');
                 fileLink.href = downloadLink['download_link'];
                 fileLink.setAttribute('download', 'userInfo.csv');
@@ -110,6 +115,7 @@ const app = new Vue({
 
         },
         uploadImage() {
+            this.loading = true;
             axios.post(Base_URL + imageUpload, {
                 'image': this.images,
 
@@ -119,14 +125,41 @@ const app = new Vue({
                     'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
                 }
             }).then(response => {
+                // images = response.data.image
+                this.loading = false
                 success = response.data.image;
                 toast(toastr.success('Upload Successful'));
-                console.log(response.data);
 
             }).catch((error) => {
                 errorData = error.response;
                 toast(toastr.error(error));
                 toast(toastr.error(errorData.data.detail));
+                this.loading = false
+            })
+        },
+        saveCustomer() {
+            this.loading = true;
+            axios.post(Base_URL + customer_URL, {
+                'username': this.customerUsername,
+                'date': this.customerDate
+                
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
+                }
+            }).then(response => {
+                this.loading = false;
+                this.customerUsername = '';
+                this.customerDate = '';
+                success = response.data;
+                toast(toastr.success('Saved Successful'));
+
+            }).catch((error) => {
+                errorData = error.response;
+                toast(toastr.error(error));
+                toast(toastr.error("Kindly fill all feilds"));
+                this.loading = false
             })
         },
 
