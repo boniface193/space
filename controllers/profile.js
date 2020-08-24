@@ -188,27 +188,24 @@ const app = new Vue({
                 "facebook_handle": this.facebookhandle,
                 "linkedin_handle": this.linkedinhandle
             }
-            if (usersProfile == undefined) {
-                alert('null')
-            }
-            // axios.put(Base_URL + usersList, {
-            //     usersProfile
+            axios.put(Base_URL + usersList, {
+                usersProfile
 
-            // }, {
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //         'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
-            //     }
-            // }).then(response => {
-            //     success = response.data.image;
-            //     toast(toastr.success('Saved successfully'));
-            //     console.log(response.data);
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
+                }
+            }).then(response => {
+                success = response.data.image;
+                toast(toastr.success('Saved successfully'));
+                console.log(response.data);
 
-            // }).catch((error) => {
-            //     errorData = error.response;
-            //     toast(toastr.error(error));
-            //     toast(toastr.error(errorData.data.detail));
-            // })
+            }).catch((error) => {
+                errorData = error.response;
+                toast(toastr.error(error));
+                toast(toastr.error(errorData.data.detail));
+            })
         }
     }
 
