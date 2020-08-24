@@ -20,6 +20,13 @@ const app = new Vue({
         planExpire: 'No Information Provided Yet',
         plan: 'No Information Provided Yet',
 
+
+        customerImage: '',
+        customerUsername: '',
+        customerGender: '',
+        customerWorkNature: '',
+        customerDateJoined: '',
+
     },
 
     mounted() {
@@ -48,6 +55,7 @@ const app = new Vue({
             })
             .then(response => {
                 profile = response.data.profile;
+                // console.log(profile)
                 this.showModal = profile.plan == null ? true : false;
                 this.date = moment(profile.date_joined).format('MMMM D, YYYY');
                 toast(toastr.success(`Welcome ${profile.username}!`));
@@ -72,6 +80,22 @@ const app = new Vue({
                     sessionStorage.removeItem('accessToken');
                     window.location.href = 'login.html';
                 }
+            })
+
+            axios.get(Base_URL + customer_URL, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
+                }
+            }).then(response => {
+                customerInfo = response.data.member
+                this.customerImage = customerInfo.image,
+                this.customerGender = customerInfo.gender,
+                this.customerWorkNature = customerInfo.work_nature,
+                this.customerUsername = customerInfo.username,
+                this.customerDateJoined = moment(customerInfo.date_joined).format('MMMM D, YYYY') ;
+            }).catch(error => {
+                toast(toastr.error(error.response.data.detail));
             })
         }
 
