@@ -9934,3 +9934,9 @@ small {
   }
 }
 
+/* this style is an addition style not part of the template */
+@media (max-width: 544px) {
+    .mobile-view img{
+        height: 100%;
+    }
+}

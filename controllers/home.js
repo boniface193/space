@@ -19,13 +19,13 @@ const app = new Vue({
         team: 'No Information Provided Yet',
         planExpire: 'No Information Provided Yet',
         plan: 'No Information Provided Yet',
-
-
+        // customer of the month
         customerImage: '',
         customerUsername: '',
         customerGender: '',
         customerWorkNature: '',
         customerDateJoined: '',
+        // movie Poll
 
     },
 
@@ -43,10 +43,12 @@ const app = new Vue({
         // ]);
         // enjoyhint_instance.run();
 
+        // auth users
         if (sessionStorage.getItem("accessToken") === null) {
             sessionStorage.removeItem('accessToken');
             window.location.href = 'login.html';
         } else {
+            // endpoint for dashboard
             axios.get(Base_URL + dashboard, {
                 headers: {
                     'Content-Type': 'application/json',
@@ -54,8 +56,8 @@ const app = new Vue({
                 }
             })
             .then(response => {
+                // return profile to dashboard
                 profile = response.data.profile;
-                // console.log(profile)
                 this.showModal = profile.plan == null ? true : false;
                 this.date = moment(profile.date_joined).format('MMMM D, YYYY');
                 toast(toastr.success(`Welcome ${profile.username}!`));
@@ -67,12 +69,14 @@ const app = new Vue({
                 this.firstname = profile.first_name;
                 this.lastname = profile.last_name;
                 this.gender = profile.gender;
-                this.lastlogin = moment(profile.last_login).format('MMMM D, YYYY') ;
+                this.lastlogin = moment(profile.last_login).format('MMMM D, YYYY');
                 this.number = profile.phone;
                 this.natureWork = profile.work_nature;
                 this.team = profile.team;
                 this.planExpire = profile.plan_expiry;
                 this.plan = profile.plan;
+                // return movie poll to dashboard
+                movie = response.data.movie;
             })
             .catch(error => {
                 toast(toastr.error(error.response.data.detail));
@@ -81,22 +85,35 @@ const app = new Vue({
                     window.location.href = 'login.html';
                 }
             })
-
+            // endpoint for customer of the month
             axios.get(Base_URL + customer_URL, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
                 }
-            }).then(response => {
+            })
+            .then(response => {
                 customerInfo = response.data.member
                 this.customerImage = customerInfo.image,
-                this.customerGender = customerInfo.gender,
-                this.customerWorkNature = customerInfo.work_nature,
-                this.customerUsername = customerInfo.username,
-                this.customerDateJoined = moment(customerInfo.date_joined).format('MMMM D, YYYY') ;
-            }).catch(error => {
+                    this.customerGender = customerInfo.gender,
+                    this.customerWorkNature = customerInfo.work_nature,
+                    this.customerUsername = customerInfo.username,
+                    this.customerDateJoined = moment(customerInfo.date_joined).format('MMMM D, YYYY');
+            })
+            .catch(error => {
                 toast(toastr.error(error.response.data.detail));
             })
+
+            // axios.get(Base_URL + moviePoll, {
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //         'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
+            //     }
+            // })
+            // .then(response => {
+            //     data = response.data,
+            //     console.log(data)
+            // })
         }
 
     },
