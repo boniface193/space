@@ -19,6 +19,7 @@ Vue.component('settings-notification', {
             this.lastLogin = moment(data.last_login).format('MMMM D, YYYY')
         })
         .catch(error => {
+            console.log(error)
             toast(toastr.error(error.response.data.detail));
             if (error.response.status == 401 || 403) {
                 sessionStorage.removeItem('accessToken');
