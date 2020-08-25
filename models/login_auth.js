@@ -5,4 +5,5 @@ const createUser = '/users/create/';
 const usersList = '/users/';
 const userInfo = '/users/info/extract/';
 const imageUpload = '/users/upload/picture/';
-const customer_URL = '/users/main/customer/'
+const customer_URL = '/users/main/customer/';
+const moviePoll = '/common/poll/movies/';
