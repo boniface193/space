@@ -8,6 +8,7 @@ Vue.component('navigating-bar', {
                 { active: false, link: 'createUsers.html', icon: 'user', title: 'Add Users', showForSuperuser: false },
                 { active: false, link: 'announcement.html', icon: 'rss', title: 'Add Announcement', showForSuperuser: false },
                 { active: false, link: 'profile.html', icon: 'folder-plus', title: 'Profile', showForSuperuser: true },
+                { active: false, link: 'packages.html', icon: 'check-square', title: 'Packages', showForSuperuser: true },
             ]
         };
     },

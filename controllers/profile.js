@@ -158,7 +158,6 @@ const app = new Vue({
             }).catch((error) => {
                 errorData = error.response;
                 toast(toastr.error(error));
-                toast(toastr.error("Kindly fill all feilds"));
                 this.loading = false
             })
         },
