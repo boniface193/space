@@ -4,13 +4,14 @@ const app = new Vue({
         is_superuser: JSON.parse(sessionStorage.getItem("is_superuser")),
         planName: '',
         planPrice: '',
-        duration: 'Daily',
+        duration: 'daily',
         loading: false,
         options: [
-            { text: 'Daily', value: 'Daily' },
-            { text: 'Weekly', value: 'Weekly' },
-            { text: 'Monthly', value: 'Monthly' }
-          ]
+            { text: 'daily', value: 'daily' },
+            { text: 'weekly', value: 'weekly' },
+            { text: 'monthly', value: 'monthly' }
+          ],
+          plans: []
     },
 
     mounted() {
@@ -21,22 +22,15 @@ const app = new Vue({
             }
         })
         .then(response => {
-            console.log(response.data)
+            this.plans = response.data.plans
         })
         .catch(error => {
-            toast(toastr.error(error.response.data.detail));
-           
+            toast(toastr.error(error.response.data));
         })
     },
 
     methods: {
         createPlan() {
-            // formData = {
-            //     'name': this.planName,
-            //     'price': this.planPrice.map(x => parseInt(x, 10)),
-            //     'duration': this.duration
-            // }
-            // console.log(typeof(formData.price), formData)
             this.loading = true
             axios.post(Base_URL + plan_URL, {
                 'name': this.planName,
@@ -49,7 +43,10 @@ const app = new Vue({
                     'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
                 }
             }).then(response => {
-                this.loading = false
+                this.loading = false,
+                this.planName = '',
+                this.planPrice = '',
+                this.duration = '',
                 success = response.data;
                 toast(toastr.success('Plan created Successful'));
 
