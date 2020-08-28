@@ -26,6 +26,14 @@ const app = new Vue({
         customerWorkNature: '',
         customerDateJoined: '',
         // movie Poll
+        title: '',
+        startDate: '',
+        endDate: '',
+        movies: [],
+        // slides: [
+        //     { image: 'https://blogdesuperheroes.es/wp-content/plugins/BdSGallery/BdSGaleria/4780.jpg', active: true, carousel: 'carousel-item'},
+        //     { image: 'https://empirecinema.com.mt/wp-content/uploads/2019/07/AngelHasFallen_banner.jpg', active: false, carousel: 'carousel-item' }
+        // ],
 
     },
 
@@ -76,9 +84,25 @@ const app = new Vue({
                 this.planExpire = profile.plan_expiry;
                 this.plan = profile.plan;
                 // return movie poll to dashboard
-                movie = response.data.movie;
+                movie = response.data.movie[0];
+                this.title = movie.tag_name;
+                this.startDate = moment(movie.vote_start).format('MMMM D, YYYY');
+                this.endDate = moment(movie.vote_end).format('MMMM D, YYYY');
+                movieschoice = movie.choices;
+                this.movies = movieschoice;
+                // for (let i = 0; i < movies.length; i++) {
+                //     const element = movies[i];
+                //     this.moviesName = element.movie_name;
+
+                //     console.log(this.moviesName)
+                // }
+                // movieName = movie.choices[0];
+                // movieDes = movie.choices[1];
+                // this.moviesName = movieName.movie_name;
+                // this.moviesDes = movieDes.description;
             })
             .catch(error => {
+                toast(toastr.error(error));
                 toast(toastr.error(error.response.data.detail));
                 if (error.response.status == 401 || 403) {
                     sessionStorage.removeItem('accessToken');

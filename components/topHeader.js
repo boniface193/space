@@ -1,9 +1,11 @@
 Vue.component('top-header', {
     data() {
         return {
-           users: [] 
+            users: [],
+            annoucement: [],
+            dateModified: ''
         }
-        
+
     },
 
     mounted() {
@@ -13,16 +15,34 @@ Vue.component('top-header', {
                 'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
             }
         })
-        .then(response => {
-            data = response.data,
-            this.users = data
+            .then(response => {
+                data = response.data,
+                    this.users = data
+            })
+
+        // announcement
+        axios.get(Base_URL + announcement, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
+            }
         })
+            .then(response => {
+                data = response.data.announcements,
+                    this.annoucement = data,
+                    this.dateModified = moment(data.last_modified).startOf('hour').fromNow()
+            })
     },
 
     methods: {
         logout() {
             sessionStorage.removeItem('accessToken');
             window.location.href = 'login.html';
+        },
+
+        singleAnnouce(id) {
+
+            window.location.href = "announceDetail.html?id=" + id;
         }
     },
     template: `            <!-- Header -->
@@ -77,13 +97,13 @@ Vue.component('top-header', {
                                         <div
                                             class="border-bottom px-4 py-3 text-center d-flex justify-content-between align-items-center">
                                             <h5 class="mb-0">Notifications</h5>
-                                            <small class="opacity-7">2 unread notifications</small>
+                                            <small class="opacity-7" v-for="(ann, index) in annoucement">{{index+1}} unread notifications</small>
                                         </div>
                                         <div class="dropdown-scroll">
                                             <ul class="list-group list-group-flush">
                                                 <li class="px-4 py-2 text-center small text-muted bg-light">Today</li>
-                                                <li class="px-4 py-3 list-group-item">
-                                                    <a href="#" class="d-flex align-items-center hide-show-toggler">
+                                                <li class="px-4 py-3 list-group-item" v-for="(anounce, index) in annoucement" :key="anounce.id">
+                                                    <a @click.prevent="singleAnnouce(anounce.id)" href="" class="d-flex align-items-center hide-show-toggler" >
                                                         <div class="flex-shrink-0">
                                                             <figure class="avatar mr-3">
                                                                 <span
@@ -92,35 +112,14 @@ Vue.component('top-header', {
                                                                 </span>
                                                             </figure>
                                                         </div>
+                                                        
                                                         <div class="flex-grow-1">
-                                                            <p
-                                                                class="mb-0 line-height-20 d-flex justify-content-between">
-                                                                2 steps verification
+                                                            <p class="mb-0 line-height-20 d-flex justify-content-between">
+                                                                {{anounce.title}}
                                                                 <i title="Mark as read" data-toggle="tooltip"
                                                                     class="hide-show-toggler-item fa fa-circle-o font-size-11"></i>
                                                             </p>
-                                                            <span class="text-muted small">20 min ago</span>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li class="px-4 py-3 list-group-item">
-                                                    <a href="#" class="d-flex align-items-center hide-show-toggler">
-                                                        <div class="flex-shrink-0">
-                                                            <figure class="avatar mr-3">
-                                                                <span
-                                                                    class="avatar-title bg-warning-bright text-warning rounded-circle">
-                                                                    <i class="ti-server"></i>
-                                                                </span>
-                                                            </figure>
-                                                        </div>
-                                                        <div class="flex-grow-1">
-                                                            <p
-                                                                class="mb-0 line-height-20 d-flex justify-content-between">
-                                                                Storage is running low!
-                                                                <i title="Mark as read" data-toggle="tooltip"
-                                                                    class="hide-show-toggler-item fa fa-circle-o font-size-11"></i>
-                                                            </p>
-                                                            <span class="text-muted small">45 sec ago</span>
+                                                            <span class="text-muted small">{{dateModified}}</span>
                                                         </div>
                                                     </a>
                                                 </li>
@@ -144,48 +143,6 @@ Vue.component('top-header', {
                                                                     class="hide-show-toggler-item fa fa-check font-size-11"></i>
                                                             </p>
                                                             <span class="text-muted small">Yesterday</span>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li class="px-4 py-3 list-group-item">
-                                                    <a href="#" class="d-flex align-items-center hide-show-toggler">
-                                                        <div class="flex-shrink-0">
-                                                            <figure class="avatar mr-3">
-                                                                <span
-                                                                    class="avatar-title bg-success-bright text-success rounded-circle">
-                                                                    <i class="ti-download"></i>
-                                                                </span>
-                                                            </figure>
-                                                        </div>
-                                                        <div class="flex-grow-1">
-                                                            <p
-                                                                class="mb-0 line-height-20 d-flex justify-content-between">
-                                                                Reports ready to download
-                                                                <i title="Mark as unread" data-toggle="tooltip"
-                                                                    class="hide-show-toggler-item fa fa-check font-size-11"></i>
-                                                            </p>
-                                                            <span class="text-muted small">Yesterday</span>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li class="px-4 py-3 list-group-item">
-                                                    <a href="#" class="d-flex align-items-center hide-show-toggler">
-                                                        <div class="flex-shrink-0">
-                                                            <figure class="avatar mr-3">
-                                                                <span
-                                                                    class="avatar-title bg-primary-bright text-primary rounded-circle">
-                                                                    <i class="ti-arrow-top-right"></i>
-                                                                </span>
-                                                            </figure>
-                                                        </div>
-                                                        <div class="flex-grow-1">
-                                                            <p
-                                                                class="mb-0 line-height-20 d-flex justify-content-between">
-                                                                The invitation has been sent.
-                                                                <i title="Mark as unread" data-toggle="tooltip"
-                                                                    class="hide-show-toggler-item fa fa-check font-size-11"></i>
-                                                            </p>
-                                                            <span class="text-muted small">Last Week</span>
                                                         </div>
                                                     </a>
                                                 </li>
@@ -372,5 +329,26 @@ Vue.component('top-header', {
                     </ul>
                 </div>
             </div>
-            <!-- ./ Header -->`
+            <!-- ./ Header -->
+
+            <!-- Announcement Modal-->
+                        
+                        
+                        <div class="modal" tabindex="-1" role="dialog" id="exampleModal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Modal title</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                <div class="modal-body">
+                                    <p>Modal body text goes here.</p>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+            `
 })
