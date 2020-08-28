@@ -9,3 +9,4 @@ const customer_URL = '/users/main/customer/';
 const moviePoll = '/common/poll/movies/';
 const announcement = '/common/announcements/';
 const announcementID = '/common/announcement/';
+const plan_URL = '/plan/'
