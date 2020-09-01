@@ -76,13 +76,14 @@
                             </div>
                             <div class="mt-2 mt-md-0 addUser">
                                 <div>
-                                    <a class="btn btn-primary" href="user_add.html" data-toggle="modal" data-target="#createUser">
+                                    <a class="btn btn-primary" data-toggle="modal"
+                                        data-target="#createUser">
                                         <i class="ti-settings mr-2"></i> Create Users Account
                                     </a>
                                 </div>
                             </div>
                         </div>
-
+ 
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card">
@@ -163,67 +164,73 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                    <form class="needs-validation" @submit="createUser" novalidate>
-                        <div class="form-row">
-                            <div class="col-md-4 mb-3">
-                                <label for="username">Username</label>
-                                <input type="text" class="form-control" id="username" placeholder="Username" required v-model="username">
-                                <div class="valid-feedback">
-                                    Looks good!
+                        <form class="needs-validation" @submit="createUser" novalidate>
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="username">Username</label>
+                                    <input type="text" class="form-control" id="username" placeholder="Username"
+                                        required v-model="username">
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" id="password" placeholder="********"
+                                        minlength="6" required v-model="password">
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="surname">Surname</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="surname" placeholder="Surname"
+                                            required v-model="surname">
+                                        <div class="invalid-feedback">
+                                            Please choose a Surname.
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="password">Password</label>
-                                <input type="password" class="form-control" id="password" placeholder="********" minlength="6" required v-model="password">
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="surname">Surname</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="surname" placeholder="Surname" required v-model="surname">
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="otherNames">Other Name</label>
+                                    <input type="text" class="form-control" id="OtherNames" placeholder="Other Name"
+                                        required v-model="othernames">
                                     <div class="invalid-feedback">
-                                        Please choose a Surname.
+                                        Please provide a valid Name.
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="tel" class="form-control" id="phone" placeholder="+234 903 ****"
+                                        required v-model="phone">
+                                    <div class="invalid-feedback">
+                                        Please provide a valid Phone Number.
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="Email">Email</label>
+                                    <input type="email" class="form-control" id="email" placeholder="Email" required
+                                        v-model="email">
+                                    <div class="invalid-feedback">
+                                        Please provide a valid Email
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-md-4 mb-3">
-                                <label for="otherNames">Other Name</label>
-                                <input type="text" class="form-control" id="OtherNames" placeholder="Other Name" required v-model="othernames">
-                                <div class="invalid-feedback">
-                                    Please provide a valid Name.
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="phone">Phone Number</label>
-                                <input type="tel" class="form-control" id="phone" placeholder="+234 903 ****" required v-model="phone">
-                                <div class="invalid-feedback">
-                                    Please provide a valid Phone Number.
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="Email">Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="Email" required v-model="email">
-                                <div class="invalid-feedback">
-                                    Please provide a valid Email
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-                            </button>
-                            <button type="submit" class="btn btn-primary" type="submit">
-                                <div v-if="loading">
-                                    <div class="spinner-border text-white align-self-center spinner-border-sm ">
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    <div v-if="loading">
+                                        <div class="spinner-border text-white align-self-center spinner-border-sm ">
+                                        </div>
                                     </div>
-                                </div>
-                                <div v-else>Add</div>
-                            </button>
-                        </div>
-                    </form>
+                                    <div v-else>Add</div>
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -239,7 +246,7 @@
         integrity="sha512-VZ6m0F78+yo3sbu48gElK4irv2dzPoep8oo9LEjxviigcnnnNvnTOJRSrIhuFk68FMLOpiNz+T77nNY89rnWDg=="
         crossorigin="anonymous"></script>
     <script src="models/login_auth.js"></script>
-    
+
     <!-- Javascript -->
     <script src="public/vendors/enjoyhint/enjoyhint.min.js"></script>
 
