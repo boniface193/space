@@ -103,8 +103,9 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr v-for="user in users">
-                                                        <td>{{user.index}}</td>
+                                                    <tr v-for="(user, index) in users" :key="user.id" @click.prevent="">
+                                                        <!-- <td>{{user.index}}</td> -->
+                                                        <td></td>
                                                         <td>{{user.title}}</td>
                                                         <td>{{user.message}}</td>
                                                         <td>{{moment(new Date()).format('MMMM D, YYYY')}}</td>
@@ -116,8 +117,7 @@
                                                                     <i class="ti-more-alt"></i>
                                                                 </a>
                                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                                    <a href="orders.html#"
-                                                                        class="dropdown-item">Edit</a>
+                                                                    <a data-toggle="modal" data-target="#createAnn" class="dropdown-item">Edit</a>
                                                                     <a href="orders.html#"
                                                                         class="dropdown-item text-danger">Delete</a>
                                                                 </div>
@@ -144,54 +144,54 @@
         </div>
         <!-- ./ Layout wrapper -->
 
-            <!-- modal for create user -->
-            <div class="modal fade" id="createAnn" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Create Announcement</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <i class="ti-close"></i>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form class="needs-validation" @submit="createAnnouncement" novalidate>
-                                <div class="form-row">
-                                    <div class="col-md-12 mb-3">
-                                        <label for="username">Title</label>
-                                        <input type="text" class="form-control" id="username" placeholder="Message Title" required
-                                            v-model="title">
-                                        <div class="invalid-feedback">
-                                            Please provide a title
-                                        </div>
+        <!-- modal for create user -->
+        <div class="modal fade" id="createAnn" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Create Announcement</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <i class="ti-close"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="needs-validation" @submit="createAnnouncement" novalidate>
+                            <div class="form-row">
+                                <div class="col-md-12 mb-3">
+                                    <label for="username">Title</label>
+                                    <input type="text" class="form-control" id="username" placeholder="Message Title" required
+                                        v-model="title">
+                                    <div class="invalid-feedback">
+                                        Please provide a title
                                     </div>
                                 </div>
-                                <div class="form-row">
-                                    <div class="col-md-12 mb-3">
-                                        <label for="otherNames">Message Body</label>
-                                        <textarea class="form-control" id="OtherNames" placeholder="Message body" required
-                                            v-model="body" cols="30" rows="10"></textarea>
-                                        <div class="invalid-feedback">
-                                            Please provide a message body.
-                                        </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12 mb-3">
+                                    <label for="otherNames">Message Body</label>
+                                    <textarea class="form-control" id="OtherNames" placeholder="Message body" required
+                                        v-model="body" cols="30" rows="10"></textarea>
+                                    <div class="invalid-feedback">
+                                        Please provide a message body.
                                     </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-                                    </button>
-                                    <button type="submit" class="btn btn-primary">
-                                        <div v-if="loading" class="spinner-border text-white align-self-center spinner-border-sm"
-                                            v-model="loading">
-                                        </div>
-                                        <div v-else>send</div>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    <div v-if="loading" class="spinner-border text-white align-self-center spinner-border-sm"
+                                        v-model="loading">
+                                    </div>
+                                    <div v-else>send</div>
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-            <!-- modal for create user ends here -->
+        </div>
+        <!-- modal for create user ends here -->
 
     </div>
     <!-- vue app ends here -->
