@@ -22,7 +22,7 @@ const app = new Vue({
             }
         })
         .then(response => {
-            this.plans = response.data.plans
+            this.plans = response.data.plans;
         })
         .catch(error => {
             toast(toastr.error(error.response.data));
