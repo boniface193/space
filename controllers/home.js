@@ -26,7 +26,7 @@ const app = new Vue({
         customerWorkNature: '',
         customerDateJoined: '',
         // movie Poll
-        title: '',
+        title: 'No Movie Title Yet',
         startDate: '',
         endDate: '',
         movies: [],
@@ -65,8 +65,8 @@ const app = new Vue({
             })
             .then(response => {
                 // return profile to dashboard
+                console.log(response)
                 profile = response.data.profile;
-                console.log(profile)
                 this.showModal = profile.plan == null ? true : false;
                 this.date = moment(profile.date_joined).format('MMMM D, YYYY');
                 toast(toastr.success(`Welcome ${profile.username}!`));
