@@ -103,7 +103,7 @@ Vue.component('top-header', {
                                             <ul class="list-group list-group-flush">
                                                 <li class="px-4 py-2 text-center small text-muted bg-light">Today</li>
                                                 <li class="px-4 py-3 list-group-item" v-for="(anounce, index) in annoucement" :key="anounce.id">
-                                                    <a @click.prevent="singleAnnouce(anounce.id)" href="" class="d-flex align-items-center hide-show-toggler" >
+                                                    <a @click.prevent="singleAnnouce(anounce.id)" class="d-flex align-items-center hide-show-toggler" >
                                                         <div class="flex-shrink-0">
                                                             <figure class="avatar mr-3">
                                                                 <span
@@ -329,26 +329,6 @@ Vue.component('top-header', {
                     </ul>
                 </div>
             </div>
-            <!-- ./ Header -->
-
-            <!-- Announcement Modal-->
-                        
-                        
-                        <div class="modal" tabindex="-1" role="dialog" id="exampleModal">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Modal title</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">×</span>
-                                        </button>
-                                    </div>
-                                <div class="modal-body">
-                                    <p>Modal body text goes here.</p>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-                        
+            <!-- ./ Header -->                        
             `
 })

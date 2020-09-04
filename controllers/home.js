@@ -66,6 +66,7 @@ const app = new Vue({
             .then(response => {
                 // return profile to dashboard
                 profile = response.data.profile;
+                console.log(profile)
                 this.showModal = profile.plan == null ? true : false;
                 this.date = moment(profile.date_joined).format('MMMM D, YYYY');
                 toast(toastr.success(`Welcome ${profile.username}!`));

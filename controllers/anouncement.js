@@ -71,7 +71,13 @@ const app = new Vue({
                         }
                     })
             }
-        }
+        },
+
+        // updateAnn() {
+        //     changeName = event.target.tagName;
+        //     changeName.
+        //     console.log(changeName)
+        // }
     }
 
 })
