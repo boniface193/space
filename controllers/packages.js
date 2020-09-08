@@ -11,7 +11,12 @@ const app = new Vue({
             { text: 'weekly', value: 'weekly' },
             { text: 'monthly', value: 'monthly' }
           ],
-          plans: []
+          plans: [],
+          code: '',
+          use: '',
+          amount: '',
+          planId: 'Freelancer'
+
     },
 
     mounted() {
@@ -55,6 +60,36 @@ const app = new Vue({
                 errorData = error.response;
                 toast(toastr.error(error));
                 this.loading = false
+            })
+        },
+        CreateVoucher () {
+            this.loading = true
+            axios.post(Base_URL + voucher_URL, {
+                'code': this.code,
+                'amount': this.amount,
+                'no_of_use': this.use,
+                'plan': this.planId
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
+                }
+            }).then(response => {
+                this.loading = false;
+                this.code = '',
+                this.amount = '',
+                this.use = '',
+                this.plan = '',
+                $('#exampleModal').modal('hide');
+                success = response.data;
+                console.log(success)
+                toast(toastr.success('Voucher created Successful'));
+
+            }).catch((error) => {
+                errorData = error.response;
+                toast(toastr.error(error));
+                toast(toastr.error(errorData));
+                
             })
         }
     }
