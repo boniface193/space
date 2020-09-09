@@ -658,17 +658,17 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-12">
-                                <div class="card">
+                                <div class="card" v-if="is_superuser">
                                     <div class="card-body">
-                                        <div class="text-center">
-                                            <h6 class="card-title mb-4 text-center">Total sales in the past week</h6>
-                                            <h2 class="font-size-35 font-weight-bold text-center">$950,000</h2>
-                                            <p>This chart shows total sales. You can use the button below for details of
-                                                this
-                                                month's sales.</p>
-                                            <div class="mt-4">
-                                                <a href="#" class="btn btn-primary">View Detail</a>
-                                            </div>
+                                        <h6 class="card-title mb-4 text-center">Voucher</h6>
+                                        <div class="text-center" v-for="voucher in vouchers">
+                                            <i class="fa fa-circle mr-1 text-success"></i> Voucher code <br>
+                                            <h4 class="card-title mb-4 text-center">{{voucher.voucher_code}}</h4>
+                                            <i class="fa fa-circle mr-1 text-danger"></i>Amount<br>
+                                            <h4 class="font-size-35 font-weight-bold text-center">₦{{voucher.amount}}</h4>
+                                            <i class="fa fa-circle mr-1 text-secondary"></i>Number of Use<br>
+                                            <h4 class="font-size-35 font-weight-bold text-center">{{voucher.no_of_use}}</h4>
+                                            
                                         </div>
                                     </div>
                                 </div>
