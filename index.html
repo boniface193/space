@@ -658,18 +658,27 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-12">
-                                <div class="card">
+                                <div class="card" v-if="is_superuser">
                                     <div class="card-body">
-                                        <div class="text-center">
-                                            <h6 class="card-title mb-4 text-center">Total sales in the past week</h6>
-                                            <h2 class="font-size-35 font-weight-bold text-center">$950,000</h2>
-                                            <p>This chart shows total sales. You can use the button below for details of
-                                                this
-                                                month's sales.</p>
-                                            <div class="mt-4">
-                                                <a href="#" class="btn btn-primary">View Detail</a>
-                                            </div>
-                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                            <h6 class="card-title mb-4 text-center">Voucher</h6>
+                                              <thead>
+                                                <tr>
+                                                  <th scope="col">Voucher code</th>
+                                                  <th scope="col">Amount</th>
+                                                  <th scope="col">Number of use</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                                <tr v-for="voucher in vouchers">
+                                                  <td>{{voucher.voucher_code}}</td>
+                                                  <td class="text-center">₦{{voucher.amount}}</td>
+                                                  <td class="text-center">{{voucher.no_of_use}}</td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                          </div>
                                     </div>
                                 </div>
 
