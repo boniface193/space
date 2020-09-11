@@ -660,16 +660,25 @@
                             <div class="col-lg-4 col-md-12">
                                 <div class="card" v-if="is_superuser">
                                     <div class="card-body">
-                                        <h6 class="card-title mb-4 text-center">Voucher</h6>
-                                        <div class="text-center" v-for="voucher in vouchers">
-                                            <i class="fa fa-circle mr-1 text-success"></i> Voucher code <br>
-                                            <h4 class="card-title mb-4 text-center">{{voucher.voucher_code}}</h4>
-                                            <i class="fa fa-circle mr-1 text-danger"></i>Amount<br>
-                                            <h4 class="font-size-35 font-weight-bold text-center">₦{{voucher.amount}}</h4>
-                                            <i class="fa fa-circle mr-1 text-secondary"></i>Number of Use<br>
-                                            <h4 class="font-size-35 font-weight-bold text-center">{{voucher.no_of_use}}</h4>
-                                            
-                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                            <h6 class="card-title mb-4 text-center">Voucher</h6>
+                                              <thead>
+                                                <tr>
+                                                  <th scope="col">Voucher code</th>
+                                                  <th scope="col">Amount</th>
+                                                  <th scope="col">Number of use</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                                <tr v-for="voucher in vouchers">
+                                                  <td>{{voucher.voucher_code}}</td>
+                                                  <td class="text-center">₦{{voucher.amount}}</td>
+                                                  <td class="text-center">{{voucher.no_of_use}}</td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                          </div>
                                     </div>
                                 </div>
 
