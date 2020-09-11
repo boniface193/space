@@ -1,6 +1,7 @@
 const app = new Vue({
     el: '#app',
     data: {
+        is_superuser: JSON.parse(sessionStorage.getItem("is_superuser")),
         message: 'No Information Provided yet',
         showModal: false,
         date: '',
@@ -30,6 +31,7 @@ const app = new Vue({
         startDate: '',
         endDate: '',
         movies: [],
+        vouchers: []
         // slides: [
         //     { image: 'https://blogdesuperheroes.es/wp-content/plugins/BdSGallery/BdSGaleria/4780.jpg', active: true, carousel: 'carousel-item'},
         //     { image: 'https://empirecinema.com.mt/wp-content/uploads/2019/07/AngelHasFallen_banner.jpg', active: false, carousel: 'carousel-item' }
@@ -128,6 +130,22 @@ const app = new Vue({
             .catch(error => {
                 toast(toastr.error(error.response.data.detail));
             })
+
+            //endpoint for Voucher
+
+             axios.get(Base_URL + voucher_URL, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
+                }
+            })
+            .then(response => {
+                this.vouchers = response.data.vouchers
+            }).catch(error => {
+                toast(toastr.error(error.response.data));
+            })
+
+
 
             // axios.get(Base_URL + moviePoll, {
             //     headers: {
